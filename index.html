@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Faysal Hossan</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;}
+body{font-family:'Roboto',sans-serif;background:#f1f3f4;color:#202124;min-height:100vh;}
+a{color:#1a73e8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{display:block;max-width:100%;}
+
+/* ── TOP NAV ── */
+.top-nav{
+  background:#066839;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  display:flex;align-items:center;
+  padding:0 24px;
+  gap:0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.18);
+}
+.nav-links li a.active{color:#fff;border-bottom-color:#86efac;}
+.nav-logo-wrap{
+  display:flex;align-items:center;gap:10px;
+  margin-right:24px;cursor:pointer;
+  text-decoration:none;
+}
+.nav-logo-img{
+  width:36px;height:36px;border-radius:50%;
+  background:#444;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  flex-shrink:0;
+  position:relative;
+}
+.nav-logo-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.nav-logo-img .ph-icon{color:rgba(255,255,255,0.4);font-size:1.2rem;}
+
+/* ── View CV বাটনের সমান হাইট ও হুবহু স্টাইল ── */
+.nav-logo-text{
+  display:inline-flex;
+  align-items:center;
+  height:31px;                         /* View CV এর সমান উচ্চতা */
+  background:#ffffff;                  /* সাদা ব্যাকগ্রাউন্ড */
+  color:#066839;                      /* ডার্টমাউথ গ্রিন টেক্সট */
+  padding:0 14px;                     /* পারফেক্ট প্যাডিং */
+  border-radius:4px;                  /* সমান বর্ডার রেডিয়াস */
+  font-family:'Roboto Slab',serif;
+  font-size:0.82rem;                  /* সমান ফন্ট সাইজ */
+  font-weight:700;
+  white-space:nowrap;
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+  transition:transform 0.15s ease;
+}
+
+.nav-logo-wrap:hover .nav-logo-text{
+  transform:translateY(-1px);
+}
+#navPhotoInput{display:none;}
+
+.nav-links{display:flex;align-items:center;gap:0;list-style:none;}
+
+.nav-links li a {
+  display: block;
+  height: 64px;
+  line-height: 64px;
+  padding: 0 16px;
+  font-family: 'Roboto Slab', serif;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #ffffff !important;         
+  opacity: 1 !important;             
+  text-decoration: none;
+  border-bottom: 3.5px solid transparent;
+  white-space: nowrap;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); 
+  transition: all 0.2s ease;
+}
+
+.nav-links li a:hover {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-decoration: none;
+}
+
+.nav-links li a.active {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  border-bottom-color: #ffffff !important; 
+}
+
+.nav-search{
+  margin-left:auto;
+  background:rgba(255,255,255,0.1);border:none;
+  color:#fff;padding:6px 14px;border-radius:4px;
+  font-size:0.8rem;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* ── PAGES ── */
+.page{display:none;padding-top:64px;min-height:100vh;}
+.page.active{display:block;}
+
+/* ── HERO BANNER SLIDESHOW ── */
+.hero-banner {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #fff;
+  overflow: hidden;
+}
+
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out; 
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-banner h1 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero-banner p {
+  font-size: 0.95rem;
+  font-weight: 400;
+  opacity: 0.95;
+  margin-top: 0.25rem;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* ── SECTION HERO (for inner pages) ── */
+.section-banner{
+  background:
+    linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0.50)),
+    url('img/Daffodil2.jpg') center/cover no-repeat;
+  min-height:260px;
+  display:flex;align-items:flex-end;
+  padding:2rem 3rem;color:#fff;
+}
+.section-banner h1{
+  font-family:'Roboto Slab',serif;
+  font-size:2rem;font-weight:700;
+  text-shadow:0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* ── MAIN CONTENT WRAPPER ── */
+.content-wrap{
+  background:#fff;
+  max-width:960px;margin:0 auto;
+  padding:2.5rem 3rem;
+  min-height:calc(100vh - 64px - 200px);
+}
+.content-wrap.wide{max-width:1100px;}
+
+/* ── HOME: 2-col layout ── */
+.home-body{
+  display:grid;grid-template-columns:340px 1fr;
+  gap:3rem;
+  align-items:start;
+}
+.home-photo{
+  display:flex;flex-direction:column;align-items:center;
+}
+.profile-photo-wrap{
+  width:100%;max-width:320px;
+  border-radius:4px;overflow:hidden;
+  background:#e8eaed;
+  aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid #dadce0;
+  position:relative;
+  transition:box-shadow 0.2s;
+}
+.profile-photo-wrap:hover{box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+.profile-photo-wrap img{width:100%;height:100%;object-fit:cover;}
+.profile-ph{
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:#5f6368;
+}
+.profile-ph svg{opacity:0.4;}
+.profile-ph span{font-size:0.75rem;text-align:center;line-height:1.4;}
+#photoInput{display:none;}
+.upload-hint{
+  margin-top:0.6rem;font-size:0.73rem;color:#5f6368;text-align:center;
+}
+.upload-label{color:#1a73e8;cursor:pointer;text-decoration:underline;}
+
+.home-text blockquote{
+  font-size:1rem;font-style:italic;color:#3c4043;
+  line-height:1.7;margin-bottom:0.3rem;
+}
+.home-text blockquote::before{content:'\201C';}
+.home-text blockquote::after{content:'\201D';}
+.home-text .quote-attr{
+  font-size:0.83rem;color:#5f6368;margin-bottom:1.5rem;
+}
+.home-text p{
+  font-size:0.93rem;color:#3c4043;line-height:1.8;margin-bottom:0.85rem;
+}
+.home-text p strong{color:#202124;}
+.contact-block{margin-top:1rem;font-size:0.88rem;color:#3c4043;line-height:1.7;}
+.contact-block a{color:#1a73e8;}
+
+/* ── NEWS ── */
+.news-section{margin-top:2.5rem;max-width:960px;margin-left:auto;margin-right:auto;}
+.news-section h2{
+  font-family:'Roboto Slab',serif;
+  font-size:1.6rem;font-weight:600;
+  text-align:center;color:#202124;
+  margin-bottom:1.75rem;
+}
+.news-list{list-style:none;}
+.news-item{
+  display:flex;gap:0.85rem;align-items:flex-start;
+  padding:0.65rem 0;
+  border-bottom:1px solid #e8eaed;
+  font-size:0.88rem;color:#3c4043;line-height:1.65;
+}
+.news-item:last-child{border-bottom:none;}
+.news-bullet{
+  width:7px;height:7px;border-radius:50%;
+  background:#066839;flex-shrink:0;margin-top:0.42rem;
+}
+
+/* ── SOCIAL ── */
+.social-section{
+  text-align:center;padding:2rem;
+  background:#f8f9fa;border-top:1px solid #e8eaed;
+}
+.social-section p{
+  font-size:0.9rem;font-weight:500;color:#3c4043;margin-bottom:1rem;
+}
+.social-icons{display:flex;gap:12px;justify-content:center;align-items:center;}
+.social-icons a{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;transition:transform 0.15s,box-shadow 0.15s;
+}
+.social-icons a:hover{transform:scale(1.1);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.si-linkedin{background:#0077b5;}
+.si-gs{background:#4285f4;}
+.si-orcid{background:#a6ce39;}
+.si-email{background:#ea4335;}
+.social-icons a span{font-size:0.65rem;font-weight:700;color:#fff;letter-spacing:0.03em;}
+
+/* ── CONTENT PAGE STYLES ── */
+/* Timeline */
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{
+  content:'';position:absolute;left:7px;top:10px;bottom:10px;
+  width:2px;background:#e8eaed;
+}
+.tl-item{position:relative;margin-bottom:2rem;}
+.tl-dot{
+  position:absolute;left:-2rem;top:0.4rem;
+  width:16px;height:16px;border-radius:50%;
+  background:#1a73e8;border:3px solid #fff;
+  box-shadow:0 0 0 2px #1a73e8;
+}
+
+/* Cards */
+.edu-card,.pub-card,.act-item{
+  background:#fff;border:1px solid #dadce0;
+  border-radius:8px;padding:1.5rem 1.75rem;
+  margin-bottom:1.1rem;
+}
+.edu-card:hover,.pub-card:hover,.act-item:hover{box-shadow:0 1px 6px rgba(60,64,67,0.2);}
+
+.ec-year{font-size:0.75rem;color:#5f6368;font-weight:500;margin-bottom:0.3rem;text-transform:uppercase;letter-spacing:0.05em;}
+.ec-title{font-size:1rem;font-weight:700;color:#202124;margin-bottom:0.25rem;}
+.ec-inst{font-size:0.88rem;color:#1a73e8;font-weight:500;margin-bottom:0.4rem;}
+.ec-body{font-size:0.85rem;color:#5f6368;line-height:1.7;}
+.ec-badges{margin-top:0.6rem;display:flex;flex-wrap:wrap;gap:0.4rem;}
+
+/* Badge */
+.badge{
+  display:inline-block;padding:0.18rem 0.65rem;border-radius:4px;
+  font-size:0.7rem;font-weight:600;
+}
+.b-blue{background:#e8f0fe;color:#1967d2;}
+.b-green{background:#e6f4ea;color:#137333;}
+.b-orange{background:#fce8e6;color:#c5221f;}
+.b-gray{background:#f1f3f4;color:#5f6368;}
+.b-yellow{background:#fef7e0;color:#b06000;}
+
+/* Publication card */
+.pub-desc{font-size:0.82rem;color:#5f6368;line-height:1.7;margin-top:0.4rem;}
+.pub-type{
+  font-size:0.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.08em;color:#1a73e8;margin-bottom:0.35rem;
+}
+.pub-title{font-size:0.93rem;font-weight:700;color:#202124;line-height:1.45;margin-bottom:0.35rem;}
+.pub-authors{font-size:0.83rem;color:#5f6368;margin-bottom:0.25rem;line-height:1.5;}
+.pub-venue{font-size:0.83rem;color:#3c4043;font-style:italic;}
+
+/* Section heading */
+.sh{
+  font-family:'Roboto Slab',serif;
+  font-size:1.25rem;font-weight:600;color:#202124;
+  margin:2rem 0 1rem;
+  padding-bottom:0.5rem;
+  border-bottom:2px solid #e8eaed;
+}
+.sh:first-child{margin-top:0;}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+
+/* Skill group */
+.sg{background:#f8f9fa;border:1px solid #dadce0;border-radius:8px;padding:1.25rem;}
+.sg-t{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#5f6368;margin-bottom:0.6rem;}
+.sp{
+  display:inline-block;background:#fff;border:1px solid #dadce0;
+  border-radius:4px;padding:0.22rem 0.65rem;
+  font-size:0.77rem;color:#202124;margin:0.2rem;
+  transition:border-color 0.15s,color 0.15s;
+}
+.sp:hover{border-color:#1a73e8;color:#1a73e8;}
+.skill-logo{width:15px;height:15px;object-fit:contain;flex-shrink:0;}
+
+/* Dataset card */
+.ds{
+  background:#fff;border:1px solid #dadce0;border-radius:8px;
+  padding:1rem 1.1rem;
+}
+.ds:hover{box-shadow:0 1px 6px rgba(60,64,67,0.2);}
+.ds-n{font-size:0.65rem;color:#1a73e8;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem;}
+.ds-t{font-size:0.82rem;font-weight:600;color:#202124;line-height:1.4;margin-bottom:0.5rem;}
+.ds-l{font-size:0.75rem;color:#1a73e8;}
+.ds-l:hover{text-decoration:underline;}
+
+/* Certificate grid */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.cc{
+  background:#fff;border:1px solid #dadce0;border-radius:8px;
+  overflow:hidden;cursor:pointer;
+  transition:box-shadow 0.15s;
+}
+.cc:hover{box-shadow:0 2px 10px rgba(60,64,67,0.25);}
+.cc-img{width:100%;height:140px;object-fit:cover;background:#f1f3f4;display:block;}
+.cc-body{padding:0.75rem 0.9rem;}
+.cc-cat{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#1a73e8;margin-bottom:0.2rem;}
+.cc-name{font-size:0.79rem;font-weight:600;color:#202124;line-height:1.3;}
+.cc-year{font-size:0.7rem;color:#5f6368;margin-top:0.15rem;}
+
+/* Activity */
+.act-item{display:flex;gap:1rem;align-items:flex-start;}
+.act-ic{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  background:#e8f0fe;
+}
+.act-t{font-weight:600;font-size:0.88rem;color:#202124;margin-bottom:0.15rem;}
+.act-s{font-size:0.8rem;color:#5f6368;line-height:1.5;}
+
+/* Modal */
+.modal{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(0,0,0,0.82);
+  align-items:center;justify-content:center;
+}
+.modal.open{display:flex;}
+.modal-img{max-width:88vw;max-height:88vh;border-radius:4px;box-shadow:0 8px 40px rgba(0,0,0,0.5);}
+.modal-close{
+  position:fixed;top:1rem;right:1rem;
+  width:40px;height:40px;background:#fff;border:none;border-radius:50%;
+  font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+
+/* Footer */
+.site-footer{
+  background:#044b28;color:rgba(255,255,255,0.85);
+  text-align:center;padding:1.25rem;font-size:0.8rem;
+  letter-spacing:0.02em;
+}
+
+/* ── PUB TABS ── */
+.pub-tabs{
+  display:flex;gap:0;
+  border-bottom:2px solid #dadce0;
+  margin-bottom:1.75rem;
+  flex-wrap:wrap;
+}
+.pub-tab{
+  background:none;border:none;cursor:pointer;
+  padding:0.75rem 1.25rem;
+  font-size:0.85rem;font-weight:500;
+  color:#5f6368;font-family:'Roboto',sans-serif;
+  border-bottom:3px solid transparent;
+  margin-bottom:-2px;
+  display:flex;align-items:center;gap:0.5rem;
+  transition:color 0.15s,border-color 0.15s;
+  white-space:nowrap;
+}
+.pub-tab:hover{color:#1a73e8;}
+.pub-tab.active{color:#1a73e8;border-bottom-color:#1a73e8;}
+.tab-count{
+  background:#e8f0fe;color:#1967d2;
+  font-size:0.7rem;font-weight:700;
+  padding:0.1rem 0.5rem;border-radius:10px;
+}
+.pub-panel{display:none;}
+.pub-panel.active{display:block;}
+
+/* Empty state */
+.empty-state{
+  text-align:center;padding:4rem 2rem;
+  background:#f8f9fa;border:1px dashed #dadce0;
+  border-radius:8px;
+}
+.empty-icon{font-size:3rem;margin-bottom:0.75rem;}
+.empty-title{font-size:1rem;font-weight:600;color:#3c4043;margin-bottom:0.4rem;}
+.empty-sub{font-size:0.85rem;color:#5f6368;}
+
+/* ── DATA COLLECTION GRID ── */
+.dc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:1rem;
+  margin-top:0.5rem;
+}
+.dc-img-wrap{
+  position:relative;
+  aspect-ratio:4/3;
+  border-radius:8px;overflow:hidden;
+  border:1px solid #dadce0;
+  cursor:pointer;
+  transition:box-shadow 0.15s;
+}
+.dc-img-wrap:hover{box-shadow:0 2px 8px rgba(0,0,0,0.18);}
+.dc-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.dc-img-wrap .dc-del{
+  position:absolute;top:5px;right:5px;
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(0,0,0,0.55);color:#fff;
+  border:none;cursor:pointer;font-size:0.75rem;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.15s;
+}
+.dc-img-wrap:hover .dc-del{opacity:1;}
+.dc-add-btn{
+  aspect-ratio:4/3;
+  border:2px dashed #dadce0;border-radius:8px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  cursor:pointer;
+  color:#5f6368;
+  transition:border-color 0.15s,background 0.15s;
+  background:#f8f9fa;
+}
+.dc-add-btn:hover{border-color:#1a73e8;background:#e8f0fe;color:#1a73e8;}
+
+/* ── EDUCATION ROW (image left, text right) ── */
+.edu-quote-strip {
+  background: #f1f3f4;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid #dadce0;
+}
+.edu-quote-strip p {
+  font-size: 0.92rem; font-weight: 500;
+  color: #202124; line-height: 1.65;
+  font-style: italic;
+}
+.edu-quote-attr {
+  font-size: 0.82rem; color: #5f6368;
+  font-style: normal !important;
+  margin-top: 0.4rem;
+}
+.edu-row {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 3rem;
+  align-items: start;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid #e8eaed;
+}
+.edu-row:last-of-type { border-bottom: none; }
+.edu-img-col { position: relative; }
+.edu-img-wrap {
+  width: 100%; aspect-ratio: 4/3;
+  border-radius: 4px; overflow: hidden;
+  cursor: pointer; background: #f1f3f4;
+  border: 1px solid #dadce0;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  transition: box-shadow 0.15s;
+}
+.edu-img-wrap:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+.edu-img-ph {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.5rem; color: #9aa0a6;
+  font-size: 0.8rem;
+}
+.edu-img-ph span:first-child { font-size: 2.5rem; }
+.edu-img-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.32);
+  color: #fff; font-size: 0.82rem; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.18s;
+}
+.edu-img-wrap:hover .edu-img-overlay { opacity: 1; }
+.edu-img-wrap img { position: absolute; inset: 0; }
+
+.edu-text-col { padding-top: 0.5rem; }
+.edu-inst-name {
+  font-size: 1.35rem; font-weight: 700;
+  color: #202124; margin-bottom: 0.3rem;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
+}
+.edu-dept {
+  font-size: 0.9rem; font-weight: 600;
+  color: #3c4043; margin-bottom: 1rem;
+  text-align: center;
+}
+.edu-desc {
+  font-size: 0.88rem; color: #3c4043;
+  line-height: 1.82; margin-bottom: 1rem;
+  text-align: justify;
+}
+.edu-meta-row {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  justify-content: center;
+}
+
+/* ── GOOGLE SCHOLAR BANNER ── */
+.gs-banner{
+  background:linear-gradient(135deg,#e8f0fe,#f0f4ff);
+  border-top:1px solid #c5d3f0;
+  border-bottom:1px solid #c5d3f0;
+  padding:1.25rem 3rem;
+}
+.gs-banner-inner{
+  max-width:960px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.gs-banner-left{display:flex;align-items:center;gap:1rem;}
+.gs-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(66,133,244,0.15);flex-shrink:0;
+}
+.gs-label{font-weight:700;font-size:0.95rem;color:#202124;margin-bottom:0.15rem;}
+.gs-sub{font-size:0.78rem;color:#5f6368;}
+.gs-btn{
+  background:#1a73e8;color:#fff;
+  padding:0.55rem 1.25rem;border-radius:6px;
+  font-size:0.82rem;font-weight:600;
+  text-decoration:none;white-space:nowrap;
+  transition:background 0.15s,transform 0.15s;
+  flex-shrink:0;
+}
+.gs-btn:hover{background:#1557b0;transform:translateY(-1px);text-decoration:none;}
+
+/* ── INLINE CERT UPLOAD in leadership ── */
+.act-item-cert { align-items: flex-start; flex-direction: row; gap: 0; padding: 1.25rem 1.5rem; }
+.act-body-full { flex: 1; display: flex; align-items: flex-start; gap: 0; width: 100%; }
+.act-body-text { flex: 1; padding-right: 1.5rem; }
+.cert-inline-row { flex-shrink: 0; width: 260px; display: flex; align-items: flex-start; padding-top: 0.1rem; }
+.cert-inline-grid {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  align-items: flex-start;
+}
+.cert-inline-thumb {
+  width: 90px; height: 68px; border-radius: 6px;
+  overflow: hidden; border: 1px solid #dadce0;
+  cursor: pointer; position: relative;
+  transition: box-shadow 0.15s;
+  flex-shrink: 0;
+}
+.cert-inline-thumb:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.cert-inline-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cert-inline-thumb .dc-del {
+  position: absolute; top: 3px; right: 3px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(0,0,0,0.55); color: #fff;
+  border: none; cursor: pointer; font-size: 0.6rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.15s;
+}
+.cert-inline-thumb:hover .dc-del { opacity: 1; }
+.cert-inline-add {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  border: 1.5px dashed #dadce0; border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem; color: #5f6368;
+  cursor: pointer; background: #f8f9fa;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.cert-inline-add:hover { border-color: #1a73e8; color: #1a73e8; background: #e8f0fe; }
+
+/* ── EVENT GALLERY (IEEE Events style) ── */
+.event-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.event-card {
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.event-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: default;
+  background: #f1f3f4;
+  border: 1px solid #dadce0;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  transition: box-shadow 0.15s;
+}
+.event-img-wrap:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+.event-img-ph {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: #bdc1c6;
+}
+.event-ph-icon { font-size: 2.5rem; }
+.event-ph-text { font-size: 0.78rem; color: #9aa0a6; }
+.event-img-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.35);
+  color: #fff; font-size: 0.82rem; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.18s;
+}
+.event-img-wrap:hover .event-img-overlay { opacity: 0; }
+.event-img-wrap img { position: absolute; inset: 0; }
+.event-caption {
+  font-size: 0.83rem; font-weight: 500;
+  color: #3c4043; text-align: center;
+  line-height: 1.4;
+}
+.event-cert-row {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem;
+}
+
+/* ═══════════════════════════════════════
+   HAMBURGER BUTTON
+═══════════════════════════════════════ */
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 101;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ═══════════════════════════════════════
+   TABLET — max 1024px
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .content-wrap { padding: 2rem; }
+  .content-wrap.wide { max-width: 100%; padding: 2rem; }
+  .home-body { grid-template-columns: 280px 1fr; gap: 2rem; }
+  .edu-row { grid-template-columns: 340px 1fr; gap: 2rem; }
+  .g3 { grid-template-columns: 1fr 1fr; }
+  .pub-tab { padding: 0.65rem 0.9rem; font-size: 0.78rem; }
+}
+
+/* ═══════════════════════════════════════
+   MOBILE — max 768px 
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 0 12px;
+  }
+  
+  .nav-logo-wrap {
+    margin-right: 8px;
+    gap: 6px;
+  }
+  
+  .nav-logo-text {
+    font-size: 0.76rem !important;
+    padding: 0 8px !important;
+    height: 28px !important;
+  }
+
+  .top-nav a[href*="drive.google"] {
+    padding: 5px 9px !important;
+    font-size: 0.72rem !important;
+    margin-left: auto !important;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: #066839 !important;
+    flex-direction: column;
+    padding: 0.5rem 0 1.5rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    z-index: 999;
+  }
+  .nav-links.open {
+    display: flex !important;
+  }
+  .nav-links li a {
+    height: auto;
+    line-height: 1.2;
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+    border-left: 4px solid transparent;
+    font-size: 0.95rem;
+  }
+  .nav-links li a.active,
+  .nav-links li a:hover {
+    border-left-color: #86efac !important;
+    background: rgba(255,255,255,0.1) !important;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+  }
+
+  .content-wrap {
+    padding: 1.2rem !important;
+  }
+  .home-body {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .home-photo {
+    align-items: center;
+  }
+  .profile-photo-wrap {
+    max-width: 220px !important;
+  }
+  .home-text {
+    padding: 1.2rem !important;
+  }
+
+  div[style*="grid-template-columns: repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+
+  .hero-banner { min-height: 200px; padding: 2rem 1rem; }
+  .hero-banner h1 { font-size: 1.6rem; }
+  .hero-banner p { font-size: 0.8rem; }
+  .g2, .g3, .cert-grid, .event-gallery { grid-template-columns: 1fr !important; }
+  .edu-row { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+}
+/* ═══════════════════════════════════════
+   SMALL MOBILE — max 480px
+═══════════════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-banner h1 { font-size: 1.45rem; }
+  .event-gallery { grid-template-columns: 1fr; }
+  .pub-tab { padding: 0.55rem 0.6rem; font-size: 0.7rem; }
+  .profile-photo-wrap { max-width: 180px; }
+  .home-text p { font-size: 0.84rem; }
+  .content-wrap { padding: 1rem; }
+  .gs-banner { padding: 0.85rem 1rem; }
+  .gs-icon { width: 38px; height: 38px; }
+  .gs-label { font-size: 0.88rem; }
+}/* ═══════════════════════════════════════
+   MOBILE & TABLET RESPONSIVE (100% FIXED)
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  .top-nav {
+    padding: 0 10px !important;
+  }
+  
+  .nav-logo-wrap {
+    margin-right: 6px !important;
+    gap: 6px !important;
+  }
+  
+  .nav-logo-img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .nav-logo-text {
+    font-size: 0.74rem !important;
+    padding: 0 8px !important;
+    height: 28px !important;
+  }
+
+  .top-nav a[href*="drive.google"] {
+    display: inline-flex !important;
+    margin-left: auto !important;
+    margin-right: 6px !important;
+    padding: 5px 8px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: #066839 !important;
+    flex-direction: column;
+    padding: 0.8rem 0 1.5rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    z-index: 9999;
+  }
+
+  .nav-links.open {
+    display: flex !important;
+  }
+
+  .nav-links li a {
+    height: auto !important;
+    line-height: 1.2 !important;
+    padding: 0.9rem 1.5rem !important;
+    border-bottom: none !important;
+    border-left: 4px solid transparent !important;
+    font-size: 0.95rem !important;
+  }
+
+  .nav-links li a.active,
+  .nav-links li a:hover {
+    border-left-color: #86efac !important;
+    background: rgba(255,255,255,0.1) !important;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+  }
+
+
+  .content-wrap {
+    padding: 1.2rem 1rem !important;
+  }
+
+  .home-body {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .home-photo {
+    align-items: center !important;
+  }
+
+  .profile-photo-wrap {
+    max-width: 200px !important;
+    margin: 0 auto !important;
+  }
+
+  .home-text {
+    padding: 1.2rem 1rem !important;
+  }
+
+  .content-wrap div[style*="grid-template-columns: repeat(2, 1fr)"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.2rem !important;
+  }
+
+  .hero-banner { min-height: 200px !important; padding: 2rem 1rem !important; }
+  .hero-banner h1 { font-size: 1.6rem !important; }
+  .hero-banner p { font-size: 0.82rem !important; }
+  .g2, .g3, .cert-grid, .event-gallery { grid-template-columns: 1fr !important; }
+  .edu-row { grid-template-columns: 1fr !important; gap: 1.2rem !important; }
+
+  .pub-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 1.25rem 1rem !important;
+    height: auto !important;
+  }
+
+  .pub-card div[style*="480px"] {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .pub-card div[style*="180px"] {
+    flex: none !important;
+    width: 100% !important;
+    max-width: 260px !important;
+    margin: 0.8rem auto 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-banner h1 { font-size: 1.4rem !important; }
+  .nav-logo-text { font-size: 0.7rem !important; padding: 0 6px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-logo-wrap" onclick="showPage('home')">
+    <div class="nav-logo-img">
+      <img id="navImg" src="img/Profile.jpg" alt="Md. Faysal Hossan" style="display:block;">
+      <span class="ph-icon" id="navPh" style="display:none;">👤</span>
+    </div>
+    <span class="nav-logo-text">Md. Faysal Hossan</span>
+  </div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" class="active" onclick="showPage('home',this);return false;">Home</a></li>
+    <li><a href="#" onclick="showPage('education',this);return false;">Education</a></li>
+    <li><a href="#" onclick="showPage('research',this);return false;">Research</a></li>
+    <li><a href="#" onclick="showPage('publications',this);return false;">Publications</a></li>
+    <li><a href="#" onclick="showPage('skills',this);return false;">Skills</a></li>
+     <li><a href="#" onclick="showPage('experience',this);return false;">Work Experience</a></li>
+    <li><a href="#" onclick="showPage('activities',this);return false;">Activities</a></li>
+  </ul>
+
+  <a href="https://drive.google.com/file/d/1Lki1ElmbHOMK_S_MT326qLxYr2xmRcHH/view?usp=sharing" target="_blank" style="margin-left: auto; display: inline-flex; align-items: center; gap: 6px; background: #ffffff; color: #066839; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: all 0.2s ease;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#066839" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10 9 9 9 8 9"></polyline>
+    </svg>
+    <span>View CV</span>
+  </a>
+
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleNav()" aria-label="Menu" style="margin-left: 12px;">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- ── 5 Images Slideshow Hero Banner ── -->
+  <div class="hero-banner" id="heroBanner">
+    
+    <div class="hero-slide active" style="background-image: url('img/Daffodil1.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('img/Daffodil2.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('img/AD.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('img/AB.jpg');"></div>
+    <div class="hero-slide" style="background-image: url('img/AC.jpg');"></div>
+    
+ 
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>Md. Faysal Hossan</h1>
+      <p>BSc Student, Department of CSE, Daffodil International University</p>
+      <p>Research Associate · Research Assistant · AI & Machine Learning · Deep Learning</p>
+    </div>
+  </div>
+
+  <div class="content-wrap">
+    <div class="home-body">
+
+      <!-- Photo col -->
+      <div class="home-photo">
+        <div class="profile-photo-wrap" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); overflow: hidden;">
+          <div id="profilePh" style="display:none;"></div>
+          <img id="profileImg" src="img/Profile.jpg" alt="Md. Faysal Hossan" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+
+      <div class="home-text" style="background: #f0f7f3; border: 1px solid #d2e5d9; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.8rem 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.04); text-align: justify;">
+        
+        <!-- Quote -->
+        <blockquote style="font-family: 'Roboto Slab', serif; font-size: 1.05rem; font-style: italic; color: #066839; line-height: 1.6; margin-bottom: 0.25rem; text-align: justify;">
+          Accuracy without interpretability is incomplete science — I build models that explain themselves.
+        </blockquote>
+        
+        <!-- Bio -->
+        <p style="font-size: 0.94rem; color: #202124; line-height: 1.85; margin-bottom: 1.2rem; text-align: justify;">
+          I am <strong>Md. Faysal Hossan</strong>, a Computer Science & Engineering graduate from Daffodil International University (DIU), Bangladesh. Currently, I work as a Research Assistant at DIU, a Lead Researcher at SynthaNano Lab, and a Research Associate at Nexcure Lab. My research focuses on Machine Learning, Deep Learning, Computer Vision, and Natural Language Processing (NLP), with a strong commitment to building reliable, transparent, and deployment-ready AI systems. I work extensively with modern deep learning architectures—including Convolutional Neural Networks (CNNs), Vision Transformers (ViTs), Mamba, and Graph Neural Networks (GNNs)—integrated with Explainable AI (XAI) to solve real-world challenges in precision agriculture and healthcare diagnostics. My research has been published in premier scientific venues, including journals by Nature Portfolio and Elsevier, conference proceedings with IEEE and Springer, a book chapter with Taylor & Francis, and preprints on Zenedo. Dedicated to open science, I actively collect real-world raw data from the field and curate multiple benchmark datasets published on Mendeley Data to support reproducible research globally. Beyond research, I also serve the scientific community as an invited international journal peer reviewer and academic mentor.
+        </p>
+
+        <!-- ── Key Highlights Box (Only Labels Bold) ── -->
+        <div style="background: #ffffff; border: 1px solid #d2e5d9; border-radius: 6px; padding: 0.9rem 1.15rem; margin-bottom: 1.1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.03);">
+          <p style="font-size: 0.82rem; font-weight: 700; color: #066839; margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.06em; text-align: left;">
+            Key Research Highlights:
+          </p>
+          <ul style="padding-left: 1.15rem; font-size: 0.85rem; color: #3c4043; line-height: 1.6; margin: 0; text-align: left;">
+            <li style="margin-bottom: 0.25rem;">
+              <strong>Publications:</strong> Peer-reviewed articles in Springer Nature (<em>Sci Rep</em>, Q1), Elsevier (<em>Data in Brief</em>, Q1), and IEEE/Springer.
+            </li>
+            <li style="margin-bottom: 0.25rem;">
+              <strong>Open Science:</strong> Real-world raw data collection and multiple benchmark datasets published on Mendeley Data.
+            </li>
+            <li style="margin-bottom: 0.25rem;">
+              <strong>Peer Reviewer:</strong> Invited reviewer for Measurement: Food (Elsevier) and EJSRR.
+            </li>
+            <li>
+              <strong>Affiliations & Leadership:</strong> Researcher at DIU, SynthaNano Lab, Nexcure Lab; former Lead at DIU Cyber Security Club.
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Contact & Location -->
+        <div class="contact-block" style="font-size: 0.88rem; color: #3c4043; line-height: 1.7; border-top: 1px solid #d2e5d9; padding-top: 0.9rem; margin-top: 0.5rem;">
+          <strong>Contact:</strong> 
+          <a href="mailto:hossain15-6367@s.diu.edu.bd" style="color: #066839; font-weight: 600;">hossain15-6367@s.diu.edu.bd</a>
+          <br 
+         <strong>Phone / WhatsApp:</strong>
+              <a href="tel:+8801957109269" style="color: #066839; font-weight: 600; text-decoration: none;">+880 1957-109269</a> 
+          <br
+          <strong>Location:</strong> Dhaka, Bangladesh
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- ── 6 Core Sections Overview Grid (Live Click & Nav Line Shift Fix) ── -->
+  <div class="content-wrap" style="padding-top: 1rem; padding-bottom: 2.5rem; min-height: auto; border-top: 1px solid #e8eaed;">
+    
+    <!-- হেডিং ব্যানার বক্স -->
+    <div style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <span style="display: flex; align-items: center; gap: 8px;">
+        📌 Explore My Portfolio
+      </span>
+      <span style="font-size: 0.72rem; background: rgba(255,255,255,0.22); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-weight: 600;">
+        6 Main Sections
+      </span>
+    </div>
+
+    
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+      
+      <!-- Box 1: Education -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            🎓 Education
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Graduated with a B.Sc. in Computer Science & Engineering from Daffodil International University (CGPA 3.01). Academic background focused on deep learning, algorithms, and applied mathematics.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'education\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+      <!-- Box 2: Research -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            🔬 Research & Thesis
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Research interests in Computer Vision, Vision Transformers (ViT), and Explainable AI (XAI: Grad-CAM, LIME, SHAP). Undergraduate thesis on the LXViT hybrid hierarchical framework.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'research\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+      <!-- Box 3: Publications -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            📰 Publications
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Author of 4 Q1 journal articles in Nature (<em>Scientific Reports</em>) & Elsevier (<em>Data in Brief</em>), 12+ IEEE/Springer conference papers, and 14 open-access benchmark datasets.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'publications\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+      <!-- Box 4: Technical Skills -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            ⚡ Technical Skills
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Strong technical proficiency in Python, PyTorch, TensorFlow, OpenCV, Scikit-learn, LaTeX, HuggingFace, AWS Cloud Foundations, Git/GitHub, and scientific research methodologies.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'skills\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+      <!-- Box 5: Work Experience -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            💼 Work Experience
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Serving as Research Assistant in Deep Learning at DIU. Experience as Undergraduate Researcher at 4IR Research Cell, mentoring junior researchers, and Machine Learning engineering internships.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'experience\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+      <!-- Box 6: Activities & Leadership -->
+      <div style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; padding: 1.4rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <h4 style="color: #066839; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 7px;">
+            🎖️ Activities & Leadership
+          </h4>
+          <p style="font-size: 0.86rem; color: #4b5563; line-height: 1.65; margin-bottom: 1.1rem; text-align: justify;">
+            Joint Lead Executive at DIU Cyber Security Club, organizing committee member of National CTF (DIU_CYBERCON), invited academic journal peer reviewer, and international conference volunteer.
+          </p>
+        </div>
+        <a href="#" onclick="document.querySelector('.nav-links a[onclick*=\'activities\']').click(); return false;" style="display: inline-flex; align-items: center; gap: 5px; color: #066839; font-size: 0.84rem; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid #066839; padding-bottom: 2px; width: fit-content; cursor: pointer;">
+          See Details →
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+  
+
+  <!-- Social & Academic Profiles -->
+  <div class="social-section" style="text-align: center; padding: 2.5rem 1.5rem; background: #d2e5d9; border-top: 1px solid #e8eaed;">
+    <p style="font-size: 1.05rem; font-weight: 700; color: #202124; margin-bottom: 1.25rem; font-family: 'Roboto Slab', serif;">
+      Connect & Collaborate
+    </p>
+    
+    <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; max-width: 950px; margin: 0 auto;">
+      
+      <!-- 1. LinkedIn -->
+      <a href="https://www.linkedin.com/in/md-faysal-hossan" target="_blank" 
+         style="background: #0a66c2; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(10,102,194,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <!-- 2. GitHub -->
+      <a href="https://github.com/Faysal6367" target="_blank" 
+         style="background: #24292e; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(36,41,46,0.3); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span>GitHub</span>
+      </a>
+
+      <!-- 3. Google Scholar -->
+      <a href="https://scholar.google.com/citations?user=KhnlCqUAAAAJ&hl=en" target="_blank" 
+         style="background: #4285f4; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(66,133,244,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        <span>Google Scholar</span>
+      </a>
+
+      <!-- 4. ResearchGate -->
+      <a href="https://www.researchgate.net/profile/Md-Hossan-43/research" target="_blank" 
+         style="background: #00ccbb; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(0,204,187,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="20" height="18" viewBox="0 0 24 20" style="vertical-align: middle;">
+          <text x="0" y="18" font-family="'Times New Roman', Georgia, serif" font-size="21" font-weight="bold" fill="#ffffff">R</text>
+          <text x="14" y="9" font-family="Arial, sans-serif" font-size="12" font-weight="900" fill="#ffffff">G</text>
+        </svg>
+        <span>ResearchGate</span>
+      </a>
+
+      <!-- 5. ORCID -->
+      <a href="https://orcid.org/my-orcid?orcid=0009-0002-2631-801X" target="_blank" 
+         style="background: #a6ce39; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(166,206,57,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 3.844-1.459 3.844-3.722 0-2.016-1.378-3.722-3.844-3.722h-2.297z"/></svg>
+        <span>ORCID</span>
+      </a>
+
+      <!-- 6. Mendeley Data -->
+      <a href="https://data.mendeley.com/my-data/" target="_blank" 
+         style="background: #d11f26; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(209,31,38,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="20" height="18" viewBox="0 0 32 26" fill="#ffffff" style="vertical-align: middle;">
+          <circle cx="5" cy="21" r="3.6"/>
+          <circle cx="16" cy="21" r="3.6"/>
+          <circle cx="27" cy="21" r="3.6"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 2.5C11.6 2.5 8.2 6.1 7.2 10.5C6.1 11.2 5 12.8 5 15.5C7.2 15.5 8.8 13.5 10.5 13.5C12.2 13.5 13.5 15.5 16 15.5C18.5 15.5 19.8 13.5 21.5 13.5C23.2 13.5 24.8 15.5 27 15.5C27 12.8 25.9 11.2 24.8 10.5C23.8 6.1 20.4 2.5 16 2.5ZM16 7.2C17.8 7.2 19.2 8.7 19.2 10.5C19.2 12.3 17.8 13.8 16 13.8C14.2 13.8 12.8 12.3 12.8 10.5C12.8 8.7 14.2 7.2 16 7.2Z"/>
+        </svg>
+        <span>Mendeley Data</span>
+      </a>
+
+      <!-- 7. Email -->
+      <a href="mailto:hossain15-6367@s.diu.edu.bd" 
+         style="background: #ea4335; color: #ffffff; padding: 7px 16px; border-radius: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600; text-decoration: none; box-shadow: 0 2px 5px rgba(234,67,53,0.25); transition: transform 0.15s;" 
+         onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        <span>Email</span>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ EDUCATION ═══════════════ -->
+<div class="page" id="page-education">
+  <div class="section-banner"><h1>Education</h1></div>
+
+
+  <div class="content-wrap wide">
+
+    <!-- ── 1. BSc DIU ── -->
+<div class="edu-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.75rem; margin-bottom: 2rem;">
+  <div class="edu-row" style="padding: 0; border-bottom: none; display: grid; grid-template-columns: 380px 1fr; gap: 2.5rem; align-items: center;">
+    <div class="edu-img-col">
+      <div class="edu-img-wrap" style="border-radius: 6px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1);">
+        <img id="eduMainImg1" src="img/DIU_Image.jpg" alt="DIU" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+    </div>
+    <div class="edu-text-col">
+      <h3 class="edu-inst-name" style="color: #066839; font-size: 1.35rem; font-weight: 700; text-align: left; margin-bottom: 0.3rem;">
+        🎓 Daffodil International University
+      </h3>
+      <p class="edu-dept" style="color: #1a73e8; font-weight: 600; font-size: 0.95rem; text-align: left; margin-bottom: 0.8rem;">
+        Department of Computer Science & Engineering
+      </p>
+      <p class="edu-desc" style="font-size: 0.88rem; color: #3c4043; line-height: 1.8; text-align: justify;">
+        My undergraduate studies at Daffodil International University helped me build a strong foundation in Computer Science and Engineering. Along with my academic courses, I worked on research in artificial intelligence, computer vision, deep learning, and Explainable AI. My undergraduate thesis, SunAFNet: A Robust and Interpretable Hybrid Framework for Sunflower Monitoring with Adversarial Resilience and mIoU-Validated Explainability, focused on developing an accurate and reliable AI model for sunflower monitoring. During my studies, I also contributed to several IEEE research papers and worked on AI applications for agriculture, healthcare, and image analysis.
+      </p>
+      <div class="ec-badges" style="margin-top: 0.8rem;">
+        <span class="badge b-blue">B.Sc. in CSE</span>
+        <span class="badge b-green">CGPA: 3.82 / 4.00</span>
+        <span class="badge b-yellow">2022 – 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ── 2. HSC Rajbari Govt. College ── -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.75rem;margin-bottom:2rem;">
+  <div class="edu-row" style="padding:0;border-bottom:none;display:grid;grid-template-columns:380px 1fr;gap:2.5rem;align-items:center;">
+    <div class="edu-img-col">
+      <div class="edu-img-wrap" style="border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <img id="eduMainImg2" src="img/rgc.jpg" alt="Model College" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+    </div>
+    <div class="edu-text-col">
+      <h3 class="edu-inst-name" style="color:#066839;font-size:1.35rem;font-weight:700;text-align:left;margin-bottom:0.3rem;">🏛️ Rajbari Govt. College</h3>
+      <p class="edu-dept" style="color:#1a73e8;font-weight:600;font-size:0.95rem;text-align:left;margin-bottom:0.8rem;">Higher Secondary Certificate (HSC) — Science</p>
+      <p class="edu-desc" style="font-size:0.88rem;color:#3c4043;line-height:1.8;text-align:justify;">I completed my Higher Secondary Certificate (HSC) in the Science group from Rajbari Govt. College with a GPA of 4.83 out of 5.00. During this period, I gained a strong academic foundation in mathematics, physics, chemistry, and biology while improving my analytical thinking, discipline, and problem-solving abilities through both classroom learning and practical laboratory work.</p>
+      <div class="ec-badges" style="margin-top:0.8rem;">
+        <span class="badge b-blue">HSC</span>
+        
+        <span class="badge b-green">GPA: 4.83 / 5.00</span>
+        <span class="badge b-yellow">2020</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ── 3. SSC Rajbari Govt. High School ── -->
+   <div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.75rem;margin-bottom:2rem;">
+  <div class="edu-row" style="padding:0;border-bottom:none;display:grid;grid-template-columns:380px 1fr;gap:2.5rem;align-items:center;">
+    <div class="edu-img-col">
+      <div class="edu-img-wrap" style="border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+        <img id="eduMainImg3" src="img/rghs.jpg" alt="Pilot School" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+    </div>
+    <div class="edu-text-col">
+      <h3 class="edu-inst-name" style="color:#066839;font-size:1.35rem;font-weight:700;text-align:left;margin-bottom:0.3rem;">🏫 Rajbari Govt. High School</h3>
+      <p class="edu-dept" style="color:#1a73e8;font-weight:600;font-size:0.95rem;text-align:left;margin-bottom:0.8rem;">Secondary School Certificate (SSC) — Science</p>
+      <p class="edu-desc" style="font-size:0.88rem;color:#3c4043;line-height:1.8;text-align:justify;">Rajbari Govt. High School is where my academic story began. These formative years instilled in me discipline, curiosity, and a deep respect for learning. The school's nurturing environment and community spirit gave me the confidence to dream big and pursue excellence — values I carry with me to this day.</p>
+      <div class="ec-badges" style="margin-top:0.8rem;">
+        <span class="badge b-blue">SSC</span>
+        
+        <span class="badge b-green">GPA: 4.50 / 5.00</span>
+        <span class="badge b-yellow">2018</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- ── Research Experience (গ্রিন ব্যানার হেডিং ও কার্ড) ── -->
+    <!-- <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🔬 Research Experience
+    </h3>
+
+    <div class="edu-card" style="border-top: 3.5px solid #066839; margin-bottom: 1.2rem;">
+      <p class="ec-year">April 2025 – Present</p>
+      <p class="ec-title" style="color: #066839; font-weight: 700; font-size: 1.05rem;">Research Assistant</p>
+      <p class="ec-inst">Supervisor: MD Masum Billah — Assistant Professor, Dept. of CSE, Daffodil International University, Dhaka</p>
+      <p class="ec-body">Contributing to Elsevier journal publications, open dataset curation, and deep learning model development for agricultural leaf disease classification tasks.</p>
+      <div class="ec-badges">
+        <span class="badge b-blue">Deep Learning</span>
+        <span class="badge b-green">PyTorch</span>
+        <span class="badge b-yellow">Explainable AI</span>
+      </div>
+    </div>
+
+    <div class="edu-card" style="border-top: 3.5px solid #066839; margin-bottom: 1.2rem;">
+      <p class="ec-year">January 2024 – January 2025</p>
+      <p class="ec-title" style="color: #066839; font-weight: 700; font-size: 1.05rem;">Executive Member — 4IR Research Cell</p>
+      <p class="ec-inst">Supervisors: Faruk Ahmed (Lecturer, Software Eng., DIU) · Dr. Md Taimur Ahad (Assoc. Prof., CSE, DIU)</p>
+      <p class="ec-body">Mentored 10 junior research members in academic writing, dataset preparation, and paper submission. Coordinated under Dr. Ahad who supervised 15 research members across the cell.</p>
+      <div class="ec-badges">
+        <span class="badge b-orange">Medical AI</span>
+        <span class="badge b-blue">Computer Vision</span>
+        <span class="badge b-gray">Mentorship</span>
+      </div>
+    </div> -->
+
+  </div>
+  <!-- <div class="site-footer">© 2026 Saifuddin Sagor. All rights reserved.</div> -->
+</div>
+
+<!-- ═══════════════ RESEARCH ═══════════════ -->
+<div class="page" id="page-research">
+  <div class="section-banner"><h1>Research</h1></div>
+  <div class="content-wrap">
+
+    <!-- ── মেইন হেডিং ১: গ্রিন ব্যানার বক্স ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 1.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🔬 Research Interests & Focus Domains
+    </h3>
+
+    <div class="g2" style="margin-bottom:1.5rem;">
+      
+      <!-- Card 1 -->
+<div class="edu-card" style="margin-bottom:0; border-top:3px solid #066839;">
+  <p class="ec-title" style="margin-bottom:0.5rem; color:#066839; font-weight:700; font-size:0.98rem;">🌿 Agricultural AI & Plant Disease Detection</p>
+  <p class="ec-body" style="text-align:justify;">Using deep learning to detect and classify plant diseases from leaf images, monitor plant health, identify disease symptoms at an early stage, and support better agricultural decision-making.</p>
+</div>
+
+      <!-- Card 2 -->
+<div class="edu-card" style="margin-bottom:0; border-top:3px solid #066839;">
+  <p class="ec-title" style="margin-bottom:0.5rem; color:#066839; font-weight:700; font-size:0.98rem;">👁 Computer Vision & Hybrid Architectures</p>
+  <p class="ec-body" style="text-align:justify;">Exploring CNN, Vision Transformer (ViT), Mamba, and Graph Neural Network (GNN) architectures for image classification, transfer learning, hybrid model development, and data augmentation.</p>
+</div>
+
+      <!-- Card 3 -->
+<div class="edu-card" style="margin-bottom:0; border-top:3px solid #066839;">
+  <p class="ec-title" style="margin-bottom:0.5rem; color:#066839; font-weight:700; font-size:0.98rem;">🧠 Explainable AI (XAI)</p>
+  <p class="ec-body" style="text-align:justify;">Exploring LIME, SHAP, Grad-CAM, Grad-CAM++, Integrated Gradients, Occlusion Sensitivity, and Attention Visualization to understand and explain AI model predictions.</p>
+</div>
+
+      <!-- Card 4 -->
+<div class="edu-card" style="margin-bottom:0; border-top:3px solid #066839;">
+  <p class="ec-title" style="margin-bottom:0.5rem; color:#066839; font-weight:700; font-size:0.98rem;">🔬 Medical Image Analysis</p>
+  <p class="ec-body" style="text-align:justify;">Using deep learning to analyze medical images, classify cells, and identify disease-related patterns for healthcare applications.</p>
+</div>
+
+      <!-- Card 5 -->
+<div class="edu-card" style="margin-bottom:0; border-top:3px solid #066839;">
+  <p class="ec-title" style="margin-bottom:0.5rem; color:#066839; font-weight:700; font-size:0.98rem;">💬 NLP & Mental Health AI</p>
+  <p class="ec-body" style="text-align:justify;">Using transformer models such as MuRIL, BanglaBERT, and Bangla-specific language models to analyze Bangla and English text for emotion detection, mental health analysis, and other NLP tasks.</p>
+</div>
+
+    </div>
+
+<h3 style="background-color:#066839;color:#ffffff;padding:0.75rem 1.2rem;border-radius:6px;margin:2.5rem 0 1.2rem;font-family:'Roboto Slab',serif;font-size:1.15rem;font-weight:600;box-shadow:0 2px 4px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;">
+  🎓 Undergraduate Thesis
+</h3>
+<!-- Thesis Card -->
+<div class="edu-card" style="border-top:3px solid #066839;">
+  <p class="ec-title" style="color:#066839;font-size:1.05rem;font-weight:700;line-height:1.45;">SunAFNet: A Robust and Interpretable Hybrid Framework for Sunflower Monitoring with Adversarial Resilience and mIoU-Validated Explainability</p>
+  <p class="ec-body" style="margin-top:0.6rem;text-align:justify;">Undergraduate thesis on Sunflower Monitoring using a hybrid deep learning framework. The research combines CNN and Transformer architectures with Explainable AI (XAI) techniques to improve model performance, transparency, and interpretability. Supervised by Md. Assaduzzaman, Assistant Professor, Department of Computer Science and Engineering, Daffodil International University.</p>
+  <div class="ec-badges" style="margin-top:0.8rem;display:flex;align-items:center;flex-wrap:wrap;gap:6px;">
+    <span class="badge b-blue">Deep Learning</span>
+    <span class="badge b-green">Computer Vision</span>
+    <span class="badge b-yellow">Explainable AI</span>
+    <span class="badge b-gray">Agricultural AI</span>
+    <a href="https://drive.google.com/file/d/1uK88_q1ClRBLbTplASNft4OuLsozrgRM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#dc2626;color:#ffffff;padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,0.1);transition:opacity 0.2s ease;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      <span>View PDF</span>
+    </a>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ PUBLICATIONS ═══════════════ -->
+<div class="page" id="page-publications">
+  <div class="section-banner"><h1>Publications</h1></div>
+  <div class="content-wrap wide">
+
+    <!-- Tab buttons -->
+    <div class="pub-tabs">
+      <button class="pub-tab active" onclick="switchTab('journal',this)">📰 Journal Articles <span class="tab-count">0</span></button>
+      <button class="pub-tab" onclick="switchTab('conference',this)">🎤 Conference Papers <span class="tab-count">12</span></button>
+      <button class="pub-tab" onclick="switchTab('bookchapter',this)">📚 Book Chapters <span class="tab-count">1</span></button>
+      <button class="pub-tab" onclick="switchTab('preprint',this)">📋 Preprints <span class="tab-count">2</span></button>
+      <button class="pub-tab" onclick="switchTab('datasets',this)">📊 Datasets <span class="tab-count">15</span></button>
+    </div>
+
+    <!-- JOURNAL -->
+    <div class="pub-panel active" id="tab-journal">
+
+      <!-- ── Journal Articles Heading Box ── -->
+      <div style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.12rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          📰 Journal Articles
+        </span>
+        <!-- <span style="font-size: 0.72rem; background: rgba(255,255,255,0.22); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-weight: 600; letter-spacing: 0.04em;">
+          Q1 Indexed · Nature & Elsevier
+        </span> -->
+      </div>
+      <!-- Empty State: Journal Articles -->
+<div style="border:1px dashed #dadce0;border-radius:8px;background:#fafafa;padding:3rem 1.5rem;margin:1.2rem 0;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;">
+  <div style="width:52px;height:52px;border-radius:50%;background:#e6f4ea;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+    <span style="font-size:1.5rem;">📄</span>
+  </div>
+  <p style="font-size:1rem;font-weight:700;color:#202124;margin-bottom:0.4rem;">No Journal Articles Yet</p>
+  <p style="font-size:0.88rem;color:#5f6368;max-width:420px;line-height:1.6;margin:0;">Journal articles are currently in progress or under review. Published articles will be listed here once available.</p>
+</div>
+
+
+      <!-- J1  -->
+      <!-- <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem;">
+        <p class="pub-type">📰 Journal · Elsevier · Q1 · Scopus Indexed · 2025</p>
+        <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">A comprehensive combined dataset on Hibiscus and Tea plant leaf disease images for classifications</p>
+        <p class="pub-authors">Billah, M. M., <strong>Sagor, S.</strong>, & Uddin, M. S.</p>
+        <p class="pub-venue"><em>Data in Brief</em>, Volume 64, 112357. Elsevier, 2025.</p>
+        <div class="ec-badges" style="margin-top: 0.7rem;">
+          <span class="badge b-yellow">Q1 · Scopus</span>
+          <span class="badge b-blue">Elsevier</span>
+          <span class="badge b-gray">2025</span>
+          <a href="https://www.sciencedirect.com/science/article/pii/S2352340925010716" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>View Paper</span>
+          </a>
+        </div>
+        <a href="https://doi.org/10.1016/j.dib.2025.112357" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://doi.org/10.1016/j.dib.2025.112357</a>
+      </div> -->
+
+
+
+
+
+
+
+    </div>
+
+   <!-- CONFERENCE -->
+    <div class="pub-panel" id="tab-conference">
+      
+      <!-- ── Conference Papers Heading Box ── -->
+      <div style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.12rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          🎤 Conference Papers
+        </span>
+        <span style="font-size: 0.72rem; background: rgba(255,255,255,0.22); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-weight: 600; letter-spacing: 0.04em;">
+          Scopus Indexed
+        </span>
+      </div>
+
+      <!-- C1 -->
+<div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1 1 480px; min-width: 260px;">
+          <p class="pub-type">🎤 IEEE Conference · ICCIT 2025</p>
+          <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">A Transfer Learning-Based Fine-Tuned Hybrid Deep Learning Framework Combining ResNet101 and Vision Transformer (ViT-B16) Models for Enhanced Jackfruit Leaf Disease Classification and Detection</p>
+          <p class="pub-authors"><strong>Hossan, M. F.</strong>, Riyad, T., Islam, S. J., Hasan, H., Faruk, A. B., &amp; Sagor, S.</p>
+          <p class="pub-venue"><em>2025 28th International Conference on Computer and Information Technology (ICCIT)</em>, pp. 1–6. IEEE. Cox's Bazar, Bangladesh, December 19–21, 2025.</p>
+          <div class="ec-badges" style="margin-top: 0.7rem;">
+            <span class="badge b-blue">IEEE</span>
+            <span class="badge b-yellow">Explainable AI</span>
+            <span class="badge b-gray">ICCIT 2025</span>
+            <a href="https://drive.google.com/file/d/1-m5t07PhFCiam4WAhb014ENoU6vzgIL6/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>View PDF</span>
+            </a>
+          </div>
+          <a href="https://ieeexplore.ieee.org/abstract/document/11491607" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://ieeexplore.ieee.org/abstract/document/11491607</a>
+        </div>
+        <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/ICCIT2025_Jackfruit.jpg'; document.getElementById('modal').classList.add('open');">
+            <img src="img/ICCIT2025_Jackfruit.jpg" alt="ICCIT 2025 Jackfruit Paper Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/ICCIT2025_Jackfruit.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+        </div>
+      </div>
+
+
+      
+      <!-- C2 -->
+      
+<div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1 1 480px; min-width: 260px;">
+          <p class="pub-type">🎤 IEEE Conference · RAAICON 2025</p>
+          <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">A Hybrid Deep Learning Approach for Mango Leaf Disease Classification: Integrating InceptionV3 and Vision Transformer</p>
+          <p class="pub-authors"><strong>Hossan, M. F.</strong>, Alam, R., Riyad, T., Taposhi, T., Prionty, Z. T., &amp; Hasan, H.</p>
+          <p class="pub-venue"><em>2025 IEEE 4th International Conference on Robotics, Automation, Artificial-Intelligence and Internet-of-Things (RAAICON)</em>, pp. 1–6. IEEE. Dhaka, Bangladesh, November 27–28, 2025.</p>
+          <div class="ec-badges" style="margin-top: 0.7rem;">
+            <span class="badge b-blue">IEEE</span>
+            <span class="badge b-yellow">Explainable AI</span>
+            <span class="badge b-gray">RAAICON 2025</span>
+            <a href="https://drive.google.com/file/d/1RS9CU7oi-Ng17WbVbw7bXU7OUfqB9Rb1/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>View PDF</span>
+            </a>
+          </div>
+          <a href="https://ieeexplore.ieee.org/abstract/document/11502534" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://ieeexplore.ieee.org/abstract/document/11502534</a>
+        </div>
+        <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/RAAICON2025_Mango.jpg'; document.getElementById('modal').classList.add('open');">
+            <img src="img/RAAICON2025_Mango.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/ICCIT2025_Jackfruit.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+        </div>
+      </div>
+
+
+      <!-- C3 -->
+<div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · RAAICON 2025</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">Exploring MuRIL for Emotion Detection in Bangla Text: A Transformer-Driven Methodology for Enhancing Multilingual Emotion Classification</p>
+    <p class="pub-authors">Mitra, S. K., Riyad, T., <strong>Hossan, M. F.</strong>, Sen, P., Islam, S. J., &amp; Shara, S. T.</p>
+    <p class="pub-venue"><em>2025 IEEE 4th International Conference on Robotics, Automation, Artificial-Intelligence and Internet-of-Things (RAAICON)</em>, pp. 1–6. IEEE. Dhaka, Bangladesh, November 27–28, 2025.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-orange">NLP</span>
+      <span class="badge b-gray">RAAICON 2025</span>
+      <a href="https://drive.google.com/file/d/1sAVajXfyzPPx2A0WbO01qkBSwI3VPSnN/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11502346" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://ieeexplore.ieee.org/abstract/document/11502346</a>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/RAAICON2025_NLP.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/RAAICON2025_NLP.jpg" alt="RAAICON 2025 NLP Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/RAAICON2025_NLP.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+
+      <!-- C4 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">JRViT: A Multi-Scale Feature Fusion Framework Integrating Convolution Encoder and Vision Transformer for Robust Jackfruit Leaf Health and Growth Stage Prediction</p>
+    <p class="pub-authors"><strong>Hossan, M. F.</strong>, Riyad, T., Nahid, M., Anis, S. M., &amp; Kabbya, M. A. S.</p>
+    <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence, and Networking (QPAIN)</em>, pp. 1–6. IEEE. Chittagong, Bangladesh, April 16–18, 2026.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Hybrid Deep Learning</span>
+      <span class="badge b-gray">QPAIN 2026</span>
+      <a href="https://drive.google.com/file/d/1AhrL3cpGt2PwOr98Z-IFz9fnk8yYAE56/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11545951" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://ieeexplore.ieee.org/abstract/document/11545951</a>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_JRViT.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/QPAIN2026_JRViT.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/QPAIN2026_JRViT.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+      <!-- C5 -->
+   <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">SwinEffNet: A Hybrid Transformer-CNN Architecture for Lemon Leaf Disease</p>
+    <p class="pub-authors">Sagor, S., Hossain, S., <strong>Hossan, M. F.</strong>, Faruk, A. B., Hasan, H., &amp; Bhuiyan, M. A. H.</p>
+    <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence &amp; Networking (QPAIN)</em>, pp. 1–6. IEEE. Chittagong, Bangladesh, April 16–18, 2026.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Hybrid Deep Learning</span>
+      <span class="badge b-gray">QPAIN 2026</span>
+      <a href="https://drive.google.com/file/d/1XjKdI5u2_IlgQDgoFSIdh7Vgw9Oubpuc/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11546032" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://ieeexplore.ieee.org/abstract/document/11546032</a>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_SwinEffNet.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/QPAIN2026_SwinEffNet.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/QPAIN2026_SwinEffNet.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+      <!-- C6 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1 1 480px; min-width: 260px;">
+          <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+          <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">Comparative Analysis of Machine Learning Algorithms for Multi-Class Bangla News</p>
+          <p class="pub-authors">Sagor, S., Miah, M. A., Hossain, S., Shihan, S. H., Neloy, M. H. A., & <strong>Hossan, M. F.</strong></p>
+          <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence and Networking (QPAIN 2026)</em>, pp. 1–6. IEEE. April 16, 2026.</p>
+          <div class="ec-badges" style="margin-top: 0.7rem;">
+            <span class="badge b-blue">IEEE</span>
+            <span class="badge b-orange">NLP</span>
+            <span class="badge b-gray">QPAIN 2026</span>
+            <a href="https://drive.google.com/file/d/1r98DBwR9dTayonSgu-coaEVU6tVwkMLA/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>View PDF</span>
+            </a>
+          </div>
+          <a href="https://doi.org/10.1109/QPAIN69676.2026.11546406" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://doi.org/10.1109/QPAIN69676.2026.11546406</a>
+        </div>
+        <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_BanglaNews.jpg'; document.getElementById('modal').classList.add('open');">
+            <img src="img/QPAIN2026_BanglaNews.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/PID_1341.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+        </div>
+      </div>
+
+      <!-- C7 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">An Advanced Deep Learning Fusion Framework Integrating VGG16 and Vision Transformer with Fine-Tuned Feature Extraction for Jackfruit Leaf Growth Stage Classification and Comprehensive Disease Identification</p>
+    <p class="pub-authors"><strong>Hossan, M. F.</strong>, Riyad, T., Saha, H., Islam, S. J., Hasan, H., &amp; Faruk, A. B.</p>
+    <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence &amp; Networking (QPAIN)</em>, pp. 1–6. IEEE. Chittagong, Bangladesh, April 16–18, 2026.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Deep Learning</span>
+      <span class="badge b-gray">QPAIN 2026</span>
+      <a href="https://drive.google.com/file/d/1Y0WhAkez2L2yb84VlEQvEaJNYcStqJNr/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11546421" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://doi.org/10.1109/QPAIN69676.2026.11546421</a>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_Jack.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/QPAIN2026_Jack.jpg" alt="QPAIN 2026 Certificate of Presentation" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/QPAIN2026_Jack.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+      <!-- C8 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">Explainable Hybrid InceptionV3-Vision Transformer Framework for Mango Leaf Disease Classification Using LIME and Grad-CAM</p>
+    <p class="pub-authors">Faruk, A. B., Riyad, T., <strong>Hossan, M. F.</strong>, Hasan, H., Shuvo, S. A., &amp; Jisan, M. A.</p>
+    <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence &amp; Networking (QPAIN)</em>, pp. 1–6. IEEE. Chittagong, Bangladesh, April 16–18, 2026.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Explainable AI</span>
+      <span class="badge b-gray">QPAIN 2026</span>
+      <a href="https://drive.google.com/file/d/1RvVorj-mgQuUEB7Cq4FcO86FuzAZCELJ/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <a href="https://ieeexplore.ieee.org/abstract/document/11546122" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://doi.org/10.1109/QPAIN69676.2026.11546122</a>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_Mango.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/QPAIN2026_Mango.jpg" alt="QPAIN 2026 Certificate of Presentation" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/QPAIN2026_Mango.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+      <!-- C9 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1 1 480px; min-width: 260px;">
+          <p class="pub-type">🎤 IEEE Conference · QPAIN 2026</p>
+          <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">LMViT: A Lightweight Hybrid MobileNet–Vision Transformer Model for Real-Time Lychee Leaf Disease Classification</p>
+          <p class="pub-authors">Hasan, H., Hossain, S., Sagor, S., Faruk, A. B., Emon, M., & <strong>Hossan, M. F.</strong></p>
+          <p class="pub-venue"><em>2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence and Networking (QPAIN 2026)</em>, pp. 1–6. IEEE. April 16, 2026.</p>
+          <div class="ec-badges" style="margin-top: 0.7rem;">
+            <span class="badge b-blue">IEEE</span>
+            <span class="badge b-yellow">Deep Learning</span>
+            <span class="badge b-gray">QPAIN 2026</span>
+            <a href="https://drive.google.com/file/d/1iexYo7zygBnUq0Bu8JE4d2B6QajGasq5/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>View PDF</span>
+            </a>
+          </div>
+          <a href="https://doi.org/10.1109/QPAIN69676.2026.11545711" target="_blank" style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#1a73e8;">🔗 https://doi.org/10.1109/QPAIN69676.2026.11545711</a>
+        </div>
+        <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/QPAIN2026_LMViT.jpg'; document.getElementById('modal').classList.add('open');">
+            <img src="img/QPAIN2026_LMViT.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/PID_1564.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+        </div>
+      </div>
+
+      <!-- C10 -->
+    <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · ICCCNT 2025</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">A Computationally Optimized Fine-Tuning Approach for CNN-Based Lung Cancer Detection</p>
+    <p class="pub-authors">Ahmed, F., Sagor, S., Neloy, M. H. A., Asif, M. A. H., Reyad, M. Z. I., &amp; <strong>Hossan, M. F.</strong></p>
+    <p class="pub-venue"><em>2025 16th International Conference on Computing, Communication and Networking Technologies (ICCCNT)</em>, pp. 1–6. IEEE. IIT Indore, Madhya Pradesh, India, July 6–11, 2025.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Deep Learning</span>
+      <span class="badge b-gray">ICCCNT 2025</span>
+      <a href="https://drive.google.com/file/d/1ZSjrLj4MkCpIPbl2VbSQZFpYLY32wGbp/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <p style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#5f6368;">📌 Paper ID: 5238 · <a href="https://16icccnt.com/index.php" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗 ICCCNT 2025</a></p>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/ICCCNT2025_PID5238Lung.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/ICCCNT2025_PID5238Lung.jpg" alt="ICCCNT 2025 Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/ICCCNT2025_PID5238Lung.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+      <!-- C11 -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+  <div style="flex: 1 1 480px; min-width: 260px;">
+    <p class="pub-type">🎤 IEEE Conference · ICCCNT 2025</p>
+    <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">MXD: A Weighted Soft Voting Ensemble of Fine-Tuned CNNs for Blood Cancer Detection from Microscopic Images</p>
+    <p class="pub-authors">Hossain, S., Ahmed, F., Sagor, S., Antor, M. R. R., Rahman, M. A., &amp; <strong>Hossan, M. F.</strong></p>
+    <p class="pub-venue"><em>2025 16th International Conference on Computing, Communication and Networking Technologies (ICCCNT)</em>, pp. 1–6. IEEE. IIT Indore, Madhya Pradesh, India, July 6–11, 2025.</p>
+    <div class="ec-badges" style="margin-top: 0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Ensemble Learning</span>
+      <span class="badge b-gray">ICCCNT 2025</span>
+      <a href="https://drive.google.com/file/d/1xepA0-5MGhT3F-YpUm7GNv7z1OG9Kv4k/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <p style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#5f6368;">📌 Paper ID: 7107 · <a href="https://16icccnt.com/index.php" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗 ICCCNT 2025</a></p>
+  </div>
+  <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+    <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/ICCCNT2025_PID7107MXD.jpg'; document.getElementById('modal').classList.add('open');">
+      <img src="img/ICCCNT2025_PID7107MXD.jpg" alt="ICCCNT 2025 Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/ICCCNT2025_PID7107MXD.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+
+<!-- C12 -->
+<div class="pub-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="pub-type">🎤 IEEE Conference · RAAICON 2026</p>
+    <p class="pub-title" style="color:#066839;font-size:1.05rem;font-weight:700;line-height:1.45;margin-bottom:0.4rem;">A Robust Weighted Ensemble Framework with Explainable AI for High-Precision Cotton Pest Identification</p>
+    <p class="pub-authors">Hayder, M. T., Farsim, I. K., Islam, S., Hossain, S., <strong>Hossan, M. F.</strong>, &amp; Sagor, S.</p>
+    <p class="pub-venue"><em>2026 IEEE 5th International Conference on Robotics, Automation, Artificial-Intelligence and Internet-of-Things (RAAICON)</em>. IEEE. Jashore University of Science and Technology (JUST), Jashore, Bangladesh, September 18–19, 2026.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">IEEE</span>
+      <span class="badge b-yellow">Explainable AI</span>
+      <span class="badge b-gray">RAAICON 2026</span>
+      <a href="https://drive.google.com/file/d/1i9BohsVKvoNfhoBZjB6uyTjOxnltMWBc/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#dc2626;color:#fff;padding:3px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,0.1);transition:opacity 0.2s ease;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span>View PDF</span>
+      </a>
+    </div>
+    <p style="display:inline-block;margin-top:0.6rem;font-size:0.78rem;color:#5f6368;">📌 Paper ID: 562 · <a href="https://raaicon.org/" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗 RAAICON 2026</a></p>
+  </div>
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;aspect-ratio:4/3;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/RAAICON2026_Cotton.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/RAAICON2026_Cotton.jpg" alt="RAAICON 2026 Certificate" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <span style="font-size:0.72rem;color:#5f6368;font-weight:600;cursor:pointer;" onclick="document.getElementById('mImg').src='img/RAAICON2026_Cotton.jpg';document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+  </div>
+</div>
+
+   </div>
+
+
+    <!-- ── BOOK CHAPTER ── -->
+    <div class="pub-panel" id="tab-bookchapter">
+
+      <!-- ── Book Chapter Heading Box ── -->
+      <div style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.12rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          📚 Peer-Reviewed Book Chapters
+        </span>
+        <span style="font-size: 0.72rem; background: rgba(255,255,255,0.22); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-weight: 600; letter-spacing: 0.04em;">
+          Taylor & Francis Group · Scopus
+        </span>
+      </div>
+
+      <!-- BC1: GViT (Taylor & Francis Book Chapter) -->
+      <div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem; display: flex; gap: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <div style="flex: 1 1 480px; min-width: 260px;">
+          <p class="pub-type">📚 Book Chapter · Taylor & Francis · 2025</p>
+          <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">GViT: A Customized Vision Transformer Model for Guava Leaf Disease Detection</p>
+          <p class="pub-authors">Ahmed, F., Sagor, S., <strong>Hossan, M. F.</strong>, Faruk, A. B., Reyad, M. Z. I., & Das, I.</p>
+          <p class="pub-venue">In: <em>Big Data, IoT and Machine Learning (Proceedings of BIM 2025)</em>. CRC Press / Taylor & Francis Group, 2025.</p>
+          
+          <div class="ec-badges" style="margin-top: 0.7rem;">
+            <span class="badge b-blue">Taylor & Francis</span>
+            <span class="badge b-green">Book Chapter</span>
+            <span class="badge b-gray">BIM 2025</span>
+            <a href="https://drive.google.com/file/d/14JamCVsa6CqojWdec8VGkEjdQawzs4SH/view?usp=drive_link" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              <span>View PDF</span>
+            </a>
+          </div>
+         
+      
+     
+        </div>
+
+        <!-- Certificate Box -->
+        <div style="flex: 0 0 180px; width: 180px; max-width: 100%; display: flex; flex-direction: column; align-items: center; gap: 5px;">
+          <div style="width: 100%; aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; border: 1px solid #dadce0; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/BIM_Conference.jpg'; document.getElementById('modal').classList.add('open');">
+            <img src="img/BIM_Conference.jpg" alt="Certificate" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <span style="font-size: 0.72rem; color: #5f6368; font-weight: 600; cursor: pointer;" onclick="document.getElementById('mImg').src='img/BIM_Conference.jpg'; document.getElementById('modal').classList.add('open');">📜 Certificate</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    
+
+
+    <!-- PREPRINT -->
+    <div class="pub-panel" id="tab-preprint">
+      
+      <!-- ── Preprint Heading Box ── -->
+      <div style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.12rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <span style="display: flex; align-items: center; gap: 8px;">
+          📋 Preprint
+        </span>
+        <span style="font-size: 0.72rem; background: rgba(255,255,255,0.22); color: #ffffff; padding: 3px 10px; border-radius: 12px; font-weight: 600; letter-spacing: 0.04em;">
+          Zenedo · Open Access
+        </span>
+      </div>
+
+      
+<!-- P1: Card -->
+<div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem;">
+  <p class="pub-type">📋 Preprint · Zenodo · 2026</p>
+  <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">MedicinalPlant: A Multi Class-Balanced Image Dataset for High-Fidelity Diagnostic Modeling of South Asian Medicinal Plants</p>
+  <p class="pub-authors"><strong>Hossan, M. F.</strong>, Sagor, S., Rahman, M. A., &amp; Billah, M. M.</p>
+  <p class="pub-venue"><em>Zenodo Preprint</em>. Published July 12, 2026.</p>
+  <div class="ec-badges" style="margin-top: 0.7rem;">
+    <span class="badge b-gray">Zenodo</span>
+    <span class="badge b-orange">Medicinal Plant AI</span>
+    <span class="badge b-yellow">Computer Vision</span>
+    <a href="https://drive.google.com/file/d/1RzlpMpvS8cBCE48yN78_utfv_EdFGVjK/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      <span>View PDF</span>
+    </a>
+  </div>
+  <a href="https://zenodo.org/records/21315207" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:0.6rem; font-size:0.78rem; color:#1a73e8;">🔗 https://zenodo.org/records/21315207</a>
+</div>
+
+
+
+
+
+<!-- P2: Card -->
+<div class="pub-card" style="border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff; padding: 1.5rem 1.75rem; margin-bottom: 1.4rem;">
+  <p class="pub-type">📋 Preprint · Zenodo · 2026</p>
+  <p class="pub-title" style="color: #066839; font-size: 1.05rem; font-weight: 700; line-height: 1.45; margin-bottom: 0.4rem;">A Multi-Fruit Leaf Image Dataset for Disease and Growth Stage Classification in Real-World Agricultural Environments</p>
+  <p class="pub-authors"><strong>Hossan, M. F.</strong>, Sagor, S., Assaduzzaman, M., Fahad, N., &amp; Hui, L. T.</p>
+  <p class="pub-venue"><em>Zenodo Preprint</em>. Published July 11, 2026.</p>
+  <div class="ec-badges" style="margin-top: 0.7rem;">
+    <span class="badge b-gray">Zenodo</span>
+    <!-- <span class="badge b-orange">Computer Vision</span> -->
+    <span class="badge b-yellow">Agricultural AI</span>
+    <a href="https://drive.google.com/file/d/1yQu_9P7naW5KZUkrUkcFDpUfpH5Wt-Af/view?usp=sharing" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc2626; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-decoration: none; box-shadow: 0 1px 2px rgba(0,0,0,0.1); transition: opacity 0.2s ease;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+      <span>View PDF</span>
+    </a>
+  </div>
+  <a href="https://zenodo.org/records/21314392" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:0.6rem; font-size:0.78rem; color:#1a73e8;">🔗 https://zenodo.org/records/21314392</a>
+</div>
+
+
+    </div>
+
+    <!-- DATASETS -->
+    <div class="pub-panel" id="tab-datasets">
+      
+      <!-- ── Top Banner Container ── -->
+      <div style="background-color: #066839; color: #ffffff; padding: 0.85rem 1.2rem; border-radius: 6px; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.08);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <p style="margin: 0; font-size: 0.86rem; line-height: 1.5; color: #ffffff;">
+          Curated open-access benchmark datasets hosted on <strong>Mendeley Data</strong>, advancing reproducible research across precision agriculture, healthcare AI, and behavioral data science.
+        </p>
+      </div>
+
+      <!-- ── Category 1: Precision Agriculture & Plant Vision ── -->
+      <div style="margin-bottom: 2.2rem;">
+        <h4 style="font-size: 1.05rem; color: #066839; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+          🌱 Precision Agriculture & Plant Vision
+          <span style="font-size: 0.72rem; background: #e6f0eb; color: #066839; padding: 2px 8px; border-radius: 12px; font-weight: 600;">11 Datasets</span>
+        </h4>
+        <div class="g3">
+          <!-- DATASETS 1#dc2626-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">Sunflower Plant Health and Growth Stage Image Dataset for Agricultural Machine Learning Applications</p>
+  <a href="https://data.mendeley.com/datasets/y3ygk98ngr/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 2-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">A medicinal plant leaf image dataset for plant health condition detection and classification</p>
+  <a href="https://data.mendeley.com/datasets/89rfgtxbdc/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 3-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">A Comprehensive Real-World Dataset of Jackfruit Leaf Diseases and Growth Stages for Intelligent Crop Health Monitoring</p>
+  <a href="https://data.mendeley.com/datasets/6d4y69dv9x/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 4-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">Extensive Repository of Jackfruit Leaf Images Capturing Health States and Developmental Stage Patterns in Natural Environments</p>
+  <a href="https://data.mendeley.com/datasets/4yvym5m8n8/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 5-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">Comprehensive Mango Leaf Images Dataset for Multi-Class Disease Classification and Automated Plant Disease Detection</p>
+  <a href="https://data.mendeley.com/datasets/jjhykb7v9w/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 6-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">CottonPest-BD: A Comprehensive Field Image Dataset of Seven Cotton Insect Pest Species for Deep Learning and Precision Agriculture</p>
+  <a href="https://data.mendeley.com/datasets/wkjg6srrk8/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 7-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">ALV-Leaf: A Multi-Class Aloe Vera Leaf Image Dataset for Disease and Health Classification</p>
+  <a href="https://data.mendeley.com/datasets/gb68xkntcv/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 8-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">AZINDI: A Multi-Class Dataset for Deep Learning Based Azadirachta Indica Leaf Disease and Health Recognition</p>
+  <a href="https://data.mendeley.com/datasets/7fh5k2kvx6/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 11-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">A Multi-Class Medicinal Plant Leaf Dataset with Multiple Leaf Conditions for Plant Health Detection and Classification</p>
+  <a href="https://data.mendeley.com/datasets/23tnz64w5m/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 10-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">BG-8: A Dataset for Multi-Class Classification of Bottle Gourd Leaf Diseases</p>
+  <a href="https://data.mendeley.com/datasets/hvz9xh7c9t/3" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 11-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">Multi-Fruit Leaf Image Dataset: Guava, Jackfruit, Mango, and Olive</p>
+  <a href="https://data.mendeley.com/datasets/82vn9k44ky/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS End-->
+        </div>
+      </div>
+
+     <!-- ── Category 2: Healthcare & Medical AI ── -->
+      <div style="margin-bottom: 2.2rem;">
+        <h4 style="font-size: 1.05rem; color: #066839; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+          🩺 Healthcare & Medical AI
+          <span style="font-size: 0.72rem; background: #e6f0eb; color: #066839; padding: 2px 8px; border-radius: 12px; font-weight: 600;">2 Datasets</span>
+        </h4>
+        <div class="g3">
+<!-- DATASETS 1-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">NeuroVision-CT: A Five-Class Brain Computed Tomography Dataset for Computer Aided Diagnosis</p>
+  <a href="https://data.mendeley.com/datasets/mcgz47rsg2/2" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 2-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">A Multi-Class Retinal Fundus Image Dataset for Deep Learning-Based Ocular Disease Diagnosis</p>
+  <a href="https://data.mendeley.com/datasets/z227d626vm/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS End-->
+        </div>
+      </div>
+
+      <!-- ── Category 3: NLP & Behavioral Data Science ── -->
+      <div style="margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1.05rem; color: #066839; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+          🧠 NLP & Behavioral Data Science
+          <span style="font-size: 0.72rem; background: #e6f0eb; color: #066839; padding: 2px 8px; border-radius: 12px; font-weight: 600;">2 Datasets</span>
+        </h4>
+        <div class="g3">
+<!-- DATASETS 1-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">BAED: A Comprehensive Bengali Emotion Dataset with Transformer-based Evaluation</p>
+  <a href="https://data.mendeley.com/datasets/3vth5v5mkx/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS 2-->
+<div class="ds" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.2rem;display:flex;flex-direction:column;justify-content:space-between;">
+  <p class="ds-t" style="color:#066839;font-size:0.88rem;font-weight:700;line-height:1.45;margin-bottom:0.8rem;">Bangla Text Paraphrase Corpus for Natural Language Processing</p>
+  <a href="https://data.mendeley.com/datasets/ffkm5rk2yg/1" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;background-color:#066839;color:#fff;padding:5px 12px;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.15);width:fit-content;margin-top:auto;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+    <span>View Dataset</span>
+  </a>
+</div>
+<!-- DATASETS End-->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<div class="page" id="page-skills">
+  <div class="section-banner"><h1>Skills</h1></div>
+  <div class="content-wrap">
+    
+    <!-- ── গ্রিন ব্যানার হেডিং ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 1.5rem 0 1.8rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      ⚡ Technical Skills
+    </h3>
+
+    <div class="g2">
+      
+      <!-- 1. Programming Languages -->
+      <div class="sg" style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1.4rem;">
+        <p class="sg-t" style="color: #066839; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.8rem;">💻 PROGRAMMING LANGUAGES</p>
+        <span class="sp">Python</span><span class="sp">C</span><span class="sp">Java</span><span class="sp">SQL</span><span class="sp">LaTeX</span><span class="sp">HTML</span><span class="sp">CSS</span><span class="sp">JavaScript</span><span class="sp">php</span>
+      </div>
+
+      <!-- 2. AI / ML Frameworks -->
+      <div class="sg" style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1.4rem;">
+        <p class="sg-t" style="color: #066839; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.8rem;">🤖 AI / ML FRAMEWORKS</p>
+        <span class="sp">PyTorch</span><span class="sp">TensorFlow</span><span class="sp">OpenCV</span><span class="sp">Scikit-learn</span><span class="sp">LIME</span><span class="sp">SHAP</span><span class="sp">Grad-CAM</span><span class="sp">Grad-CAM++</span><span class="sp">LayerCAM</span><span class="sp">Score-CAM</span><span class="sp">Occlusion Sensitivity</span>
+      </div>
+
+      <!-- 3. Tools & Platforms -->
+      <div class="sg" style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1.4rem;">
+        <p class="sg-t" style="color: #066839; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.8rem;">🛠️ TOOLS & PLATFORMS</p>
+        <span class="sp">Git / GitHub</span><span class="sp">Lightning AI</span><span class="sp">Google Colab</span><span class="sp">Kaggle</span><span class="sp">Linux / Bash</span><span class="sp">AWS</span><span class="sp">Mendeley</span><span class="sp">Jupyter</span><span class="sp">Google Drive</span><span class="sp">VS Code</span>
+      </div>
+
+      <!-- 4. Office & Productivity -->
+      <div class="sg" style="background: #ffffff; border: 1px solid #dadce0; border-top: 3.5px solid #066839; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 1.4rem;">
+        <p class="sg-t" style="color: #066839; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; margin-bottom: 0.8rem;">📊 OFFICE & PRODUCTIVITY</p>
+        <span class="sp">MS Word</span><span class="sp">MS Excel</span><span class="sp">MS PowerPoint</span><span class="sp">Graphics Design (Canva, Figma)</span><span class="sp">Video Editing (CapCut)</span><span class="sp">Computer Fundamentals</span><span class="sp">Google Sheets</span><span class="sp">Google Docs</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- ═══════════════ WORK EXPERIENCE ═══════════════ -->
+<div class="page" id="page-experience">
+  <div class="section-banner"><h1>Work Experience</h1></div>
+  <div class="content-wrap">
+
+
+<!-- ── Research Experience ── -->
+<h3 style="background-color:#066839;color:#ffffff;padding:0.75rem 1.2rem;border-radius:6px;margin:1.5rem 0 1.2rem;font-family:'Roboto Slab',serif;font-size:1.15rem;font-weight:600;box-shadow:0 2px 4px rgba(0,0,0,0.08);display:flex;align-items:center;gap:8px;">
+  🔬 Research Experience
+</h3>
+
+<!-- Card: Research Assistant -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">February 2026 – Present</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">Research Assistant, Dr. Md. Masum Billah</p>
+    <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;">Department of CSE, Daffodil International University (DIU)</p>
+    <p class="ec-body" style="text-align:justify;">Investigate machine learning and deep learning approaches for agricultural and medical image classification, with an emphasis on developing and evaluating computer vision models for improved performance and explainability. Contribute to collaborative research projects and scientific manuscript preparation for IEEE and Springer conferences and journals.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Deep Learning</span>
+      <span class="badge b-green">Computer Vision</span>
+      <span class="badge b-yellow">Explainable AI</span>
+      <span class="badge b-gray">Research Assistant</span>
+    </div>
+  </div>
+  <!-- Certificate Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/ResearchRA.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/ResearchRA.jpg" alt="Research Assistant Certificate" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+    <!-- <span style="font-size:0.72rem;color:#5f6368;font-weight:600;cursor:pointer;" onclick="document.getElementById('mImg').src='img/ResearchRA.png';document.getElementById('modal').classList.add('open');">📜 Certificate</span> -->
+  </div>
+</div>
+
+
+
+<!-- Card: Research Assistant 2 -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">December 2025 – Present</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">Research Assistant, Mr. Md. Assaduzzaman</p>
+    <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;">Department of CSE, Daffodil International University (DIU)</p>
+    <p class="ec-body" style="text-align:justify;">Conduct research in Artificial Intelligence, Deep Learning, Computer Vision, and Explainable AI (XAI), focusing on agricultural applications. Develop hybrid CNN–Transformer frameworks for plant disease classification and sunflower monitoring, while contributing to dataset development, experimental evaluation, model interpretability, and scientific manuscript preparation for journal and conference submissions.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Deep Learning</span>
+      <span class="badge b-green">Computer Vision</span>
+      <span class="badge b-yellow">Explainable AI</span>
+      <span class="badge b-gray">Research Assistant</span>
+    </div>
+  </div>
+  <!-- Certificate Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full certificate" onclick="document.getElementById('mImg').src='img/ResearchRA.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/ResearchRA.jpg" alt="Research Assistant Certificate" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+    <!-- <span style="font-size:0.72rem;color:#5f6368;font-weight:600;cursor:pointer;" onclick="document.getElementById('mImg').src='img/ResearchRA.png';document.getElementById('modal').classList.add('open');">📜 Certificate</span> -->
+  </div>
+</div>
+
+
+
+<!-- ── 2. Job & Internship Experience ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      💼 Job & Internship Experience
+    </h3>
+
+    <!-- Card 3: Intern -->
+<!-- Card: Research Associate - SkillChefs -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">September 2026 – Present</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">Research Associate, SkillChefs</p>
+    <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;"><a href="https://skillchefs.com/" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗SkillChefs</a></p>
+    <p class="ec-body" style="text-align:justify;">Mentor students in AI research by providing guidance in machine learning, deep learning, research methodology, scientific writing, and academic paper preparation. Support students in model development, research implementation, and manuscript preparation for publication.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Machine Learning</span>
+      <span class="badge b-green">Deep Learning</span>
+      <span class="badge b-yellow">Research Mentorship</span>
+      <span class="badge b-gray">Research Associate</span>
+    </div>
+  </div>
+  <!-- SkillChefs Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full image" onclick="document.getElementById('mImg').src='img/SkillChefs.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/SkillChefs.jpg" alt="SkillChefs" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Card: Lead Researcher - SynthaNano Lab -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">August 2026 – Present</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">Lead Researcher, SynthaNano Lab</p>
+    <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;"><a href="https://www.synthananolab.com/" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗SynthaNano Lab</a></p>
+    <p class="ec-body" style="text-align:justify;">Lead AI research activities by supervising research projects, guiding researchers in research methodology, and coordinating research workflows. Evaluate experimental outcomes and oversee scientific manuscript preparation to support research quality and publication.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Artificial Intelligence</span>
+      <span class="badge b-green">Research Leadership</span>
+      <span class="badge b-yellow">Research Methodology</span>
+      <span class="badge b-gray">Lead Researcher</span>
+    </div>
+  </div>
+  <!-- SynthaNano Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full image" onclick="document.getElementById('mImg').src='img/SynthaNano.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/SynthaNano.jpg" alt="SynthaNano Lab" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Card: Research Associate - Nexcure Research -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">October 2025 – Present</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">Research Associate, Nexcure Research</p>
+    <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;"><a href="https://www.facebook.com/profile.php?id=61593869884251" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗Nexcure Research</a></p>
+    <p class="ec-body" style="text-align:justify;">Contribute to research in machine learning, deep learning, computer vision, and natural language processing (NLP), while mentoring students in dataset preparation, model development, and performance evaluation. Provide guidance in research methodology, scientific writing, and manuscript preparation, and support collaborative projects aimed at academic publication.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Machine Learning</span>
+      <span class="badge b-green">Deep Learning</span>
+      <span class="badge b-yellow">Computer Vision</span>
+      <span class="badge b-gray">NLP</span>
+      <span class="badge b-blue">Research Mentorship</span>
+    </div>
+  </div>
+  <!-- Nexcure Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full image" onclick="document.getElementById('mImg').src='img/Nexcure.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/Nexcure.jpg" alt="Nexcure Research" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+
+    <!-- ── 3. Club & Leadership Experience ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🛡️ Club & Leadership Experience
+    </h3>
+
+    <!-- Card 4: Joint Lead -->
+<!-- Card: President - RDSA -->
+<div class="edu-card" style="border:1px solid #dadce0;border-top:3.5px solid #066839;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);background:#fff;padding:1.5rem 1.75rem;margin-bottom:1.4rem;display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+  <div style="flex:1 1 480px;min-width:260px;">
+    <p class="ec-year">November 2025 – April 2026</p>
+    <p class="ec-title" style="color:#066839;font-size:1.08rem;font-weight:700;margin-bottom:0.35rem;">President, Rajbari District Student Association (RDSA)</p>
+     <p class="ec-inst" style="color:#1a73e8;font-weight:600;margin-bottom:0.6rem;"><a href="https://www.facebook.com/rdsadiu" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:none;">🔗RDSA</a></p>
+    <p class="ec-body" style="text-align:justify;">Led the overall organizational activities of the Rajbari District Student Association (RDSA), overseeing executive committee operations and coordinating student-focused events and initiatives. Facilitated teamwork, supported strategic planning and decision-making, and contributed to strengthening communication, collaboration, and engagement among members to promote effective organizational management and student welfare.</p>
+    <div class="ec-badges" style="margin-top:0.7rem;">
+      <span class="badge b-blue">Leadership</span>
+      <span class="badge b-green">Event Coordination</span>
+      <span class="badge b-yellow">Team Management</span>
+      <span class="badge b-gray">President</span>
+    </div>
+  </div>
+  <!-- RDSA Image: Auto Height -->
+  <div style="flex:0 0 180px;width:180px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:5px;">
+    <div style="width:100%;border-radius:6px;overflow:hidden;border:1px solid #dadce0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1);background:#fff;" title="Click to view full image" onclick="document.getElementById('mImg').src='img/RDSA.jpg';document.getElementById('modal').classList.add('open');">
+      <img src="img/RDSA.jpg" alt="Rajbari District Student Association (RDSA)" style="display:block;width:100%;height:auto;object-fit:contain;">
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+
+</div>
+
+
+<!-- Modal (for certificate & photo popups) -->
+<div class="modal" id="modal" onclick="closeM()">
+  <button class="modal-close" onclick="closeM()">✕</button>
+  <img class="modal-img" id="mImg" src="" alt="Popup Image" onclick="event.stopPropagation()">
+</div>
+
+
+
+<!-- ═══════════════ ACTIVITIES ═══════════════ -->
+<div class="page" id="page-activities">
+  <div class="section-banner"><h1>Activities</h1></div>
+  <div class="content-wrap">
+
+    <!-- ── Heading 1 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 1.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🎖️ Club & Organization Certificates
+    </h3>
+    <div class="event-gallery" id="leadGallery">
+      <!-- ── Joint Lead Executive ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="lead1ImgWrap">
+          <img id="lead1MainImg" src="img/Joint_Lead_Executive.jpg" alt="Joint Lead Executive" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">JOINT LEAD EXECUTIVE at Cyber Security Club, DIU — 2025–2026</p>
+      </div>
+
+      <!-- ── Assistant Press Secretary ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="lead2ImgWrap">
+          <img id="lead2MainImg" src="img/Assistant_Press_Secretary.jpg" alt="Assistant Press Secretary" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">ASSISTANT PRESS SECRETARY at Cyber Security Club, DIU — 2024–2025</p>
+      </div>
+
+      <!-- ── 4IR Research Cell ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="lead3ImgWrap">
+          <img id="lead3MainImg" src="img/cell.png" alt="Executive Member" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">EXECUTIVE MEMBER at 4IR Research Cell, DIU — 2024–2025</p>
+      </div>
+    </div>
+
+    <!-- ── Heading 2 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🤝 Volunteering
+    </h3>
+    <div class="event-gallery" id="volGallery">
+      <!-- ── CTF ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="vol1ImgWrap">
+          <img id="vol1MainImg" src="img/Volunteers_CTF.jpg" alt="CTF Volunteer" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">VOLUNTEER at DIU CYBERCON National CTF 2025</p>
+      </div>
+
+      <!-- ── IDAA ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="vol2ImgWrap">
+          <img id="vol2MainImg" src="img/Voluntere_IDAA.jpg" alt="IDAA Group" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">VOLUNTEER at IDAA 2025 International Conference — DIU, December 2025</p>
+      </div>
+
+      <!-- ── Industry-Academia Summit ── -->
+      <div class="event-card">
+        <div class="event-img-wrap" id="vol3ImgWrap" >
+          <img id="vol3MainImg" src="img/Indristial_certificate_166.jpg" alt="Industry Summit" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">PARTICIPANT at Industry-Academia Summit 2025 — DIU</p>
+      </div>
+    </div>
+
+    <!-- ── Heading 3 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      📜 Professional Training & Certifications
+    </h3>
+    <div class="event-gallery" id="certGallery">
+      <!-- AWS -->
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img id="cert1MainImg" src="img/AWS_Certificate.jpg" alt="AWS" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">AWS ACADEMY GRADUATE — Cloud Foundations · March 2026</p>
+      </div>
+      <!-- Computer Training -->
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <div class="event-img-ph"><span class="event-ph-icon">📷</span><span class="event-ph-text">Click to add photo</span></div>
+          <img id="cert2MainImg" src="img/Computer_Train_Certificate.jpg" alt="Computer Training" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">COMPUTER OFFICE APPLICATIONS & GRAPHICS — National Computer Training Center · 2019</p>
+      </div>
+    </div>
+
+    <!-- ── Heading 4 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🎤 Peer Reviewers Certificate
+    </h3>
+    <div class="event-gallery" id="confGallery">
+      <!-- ICCIT 2025 -->
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img id="conf1MainImg" src="img/ReviewCertificate.jpg" alt="ICCIT 2025" style="width:100%; height:100%; object-fit:cover; position:absolute; inset:0;">
+          <!-- -->
+        </div>
+        <p class="event-caption">PEER REVIEWER — European Journal of Scientific Research and Reviews (EJSRR) · 2026</p>
+      </div>
+
+    </div>
+
+    <!-- ── Heading 5 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      📷 Data Collection — Field Images
+    </h3>
+    <p style="font-size:0.85rem;color:#5f6368;margin-bottom:1.25rem;">Field photos from real-world data collection activities for research datasets. Click any photo to view full size. Click caption to edit.</p>
+    <div class="event-gallery" id="dcGallery">
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Lab1.jpg" alt="Lab" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">RESEARCH LAB — Data collection activity, DIU 2024</p>
+      </div>
+      
+      <!-- Add-new card -->
+      <div class="event-card" id="dcAddCard">
+        <div class="event-img-wrap dc-add-new" style="border:2px dashed #dadce0; background:#f8f9fa;">
+          <div class="event-img-ph">
+            <span class="event-ph-icon" style="color:#1a73e8;">+</span>
+            <span class="event-ph-text" style="color:#1a73e8; font-weight:500;">Add Field Photo</span>
+          </div>
+        </div>
+        <input type="file" id="fieldPhotoInput" accept="image/*" multiple style="display:none;" onchange="handleDcUpload(this)">
+        <p class="event-caption" style="color:#9aa0a6;">Click above to upload field images</p>
+      </div>
+    </div>
+
+    <!-- ── Heading 6 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      🖼️ Gallery
+    </h3>
+    <p style="font-size:0.85rem;color:#5f6368;margin-bottom:1.25rem;">Club activities, conference group photos, events and other memorable moments. Click caption to edit description.</p>
+    <div class="event-gallery" id="mainGallery">
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club1.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CYBER SECURITY CLUB — Club activities, DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club2.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CYBER SECURITY CLUB — Events, DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club3.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CYBER SECURITY CLUB — Group Photo, DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club4.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club5.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club6.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Club7.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Daffodil1.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Daffodil2.jpg" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">CLUB ACTIVITIES — DIU 2025</p>
+      </div>
+      
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/IDAA Group Photo.JPG" alt="Club" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">IDAA Group Photo—DIU 2025</p>
+      </div>
+    </div>
+
+    <!-- ── Heading 7 ── -->
+    <h3 style="background-color: #066839; color: #ffffff; padding: 0.75rem 1.2rem; border-radius: 6px; margin: 2.5rem 0 1.2rem; font-family: 'Roboto Slab', serif; font-size: 1.15rem; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 8px;">
+      ✈️ Travelling
+    </h3>
+    <p style="font-size:0.85rem;color:#5f6368;margin-bottom:1.25rem;">Places I have visited — conferences, field trips, research activities, and personal exploration. Click <strong>+ Add Photo</strong> to upload travel memories.</p>
+    <div class="event-gallery" id="travelGallery">
+      <div class="event-card">
+        <div class="event-img-wrap">
+          <img src="img/Daffodil2.jpg" alt="DIU" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        </div>
+        <p class="event-caption">DAFFODIL INTERNATIONAL UNIVERSITY — Campus Life, Dhaka 2024</p>
+      </div>
+      <div class="event-card" id="travelAddCard">
+        <div class="event-img-wrap dc-add-new" style="border:2px dashed #dadce0; background:#f8f9fa;">
+          <div class="event-img-ph">
+            <span class="event-ph-icon" style="color:#1a73e8;">✈</span>
+            <span class="event-ph-text" style="color:#1a73e8; font-weight:500;">Add Travel Photo</span>
+          </div>
+        </div>
+        <input type="file" id="travelPhotoInput" accept="image/*" multiple style="display:none;" onchange="handleGalleryUpload(this,'travelGallery','travelAddCard')">
+        <p class="event-caption" style="color:#9aa0a6;">Click above to add travel photos</p>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="site-footer">© 2026 Md. Faysal Hossan. All rights reserved.</div>
+</div>
+
+
+<script>
+// Hamburger nav toggle
+function toggleNav() {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('navHamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+// Navigation
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    const first = document.querySelector('.nav-links a');
+    if (first) first.classList.add('active');
+  }
+
+  // ── Smooth Page Navigation (From Home Page Cards) ──
+function navigateTo(pageId) {
+  const targetNavLink = document.querySelector(`.nav-links a[onclick*="${pageId}"]`);
+  showPage(pageId, targetNavLink);
+  window.scrollTo(0, 0);
+}
+
+  // Close mobile nav
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+
+// Photo upload — main profile
+// Photo upload (Safe Check)
+const pInput = document.getElementById('photoInput');
+if (pInput) {
+  pInput.addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.getElementById('profileImg');
+      if (img) img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+const npInput = document.getElementById('navPhotoInput');
+if (npInput) {
+  npInput.addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const navImg = document.getElementById('navImg');
+      if (navImg) navImg.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Publication tabs
+function switchTab(id, el) {
+  document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pub-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// Education image uploader
+function setEduImg(input, imgId) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = document.getElementById(imgId);
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    const ph = img.parentElement.querySelector('.edu-img-ph');
+    if (ph) ph.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+
+// Event card main image uploaders
+function makeEventImgUploader(inputId, imgId, phId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('change', function(e) {
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.getElementById(imgId);
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      // hide placeholder
+      const wrap = img.parentElement;
+      const ph = wrap.querySelector('.event-img-ph');
+      if (ph) ph.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
+  });
+}
+makeEventImgUploader('lead1ImgInput','lead1MainImg');
+makeEventImgUploader('lead2ImgInput','lead2MainImg');
+makeEventImgUploader('lead3ImgInput','lead3MainImg');
+makeEventImgUploader('vol1ImgInput', 'vol1MainImg');
+makeEventImgUploader('vol2ImgInput', 'vol2MainImg');
+makeEventImgUploader('vol3ImgInput', 'vol3MainImg');
+makeEventImgUploader('cert1ImgInput','cert1MainImg');
+makeEventImgUploader('cert2ImgInput','cert2MainImg');
+makeEventImgUploader('conf1ImgInput','conf1MainImg');
+makeEventImgUploader('conf2ImgInput','conf2MainImg');
+makeEventImgUploader('conf3ImgInput','conf3MainImg');
+makeEventImgUploader('conf4ImgInput','conf4MainImg');
+
+// Inline cert uploaders
+// Inline certificate uploader (thumbnail inside grid)
+function makeInlineCertUploader(inputId, gridId) {
+  const input = document.getElementById(inputId);
+  const grid  = document.getElementById(gridId);
+  if (!input || !grid) return;
+  input.addEventListener('change', function(e) {
+    Array.from(e.target.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const src = ev.target.result;
+        const thumb = document.createElement('div');
+        thumb.className = 'cert-inline-thumb';
+        thumb.innerHTML = `<img src="${src}" alt="Certificate">
+          <button class="dc-del" onclick="this.parentElement.remove()" title="Remove">✕</button>`;
+        thumb.querySelector('img').addEventListener('click', () => {
+          document.getElementById('mImg').src = src;
+          document.getElementById('modal').classList.add('open');
+        });
+        const addBtn = grid.querySelector('.cert-inline-add');
+        grid.insertBefore(thumb, addBtn);
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value = '';
+  });
+}
+
+makeInlineCertUploader('lead1Input','lead1Grid');
+makeInlineCertUploader('lead2Input','lead2Grid');
+makeInlineCertUploader('lead3Input','lead3Grid');
+makeInlineCertUploader('vol1Input', 'vol1Grid');
+makeInlineCertUploader('vol2Input', 'vol2Grid');
+makeInlineCertUploader('vol3Input', 'vol3Grid');
+makeInlineCertUploader('cert1Input','cert1Grid');
+makeInlineCertUploader('cert2Input','cert2Grid');
+makeInlineCertUploader('conf1Input','conf1Grid');
+makeInlineCertUploader('conf2Input','conf2Grid');
+makeInlineCertUploader('conf3Input','conf3Grid');
+makeInlineCertUploader('conf4Input','conf4Grid');
+
+// Generic gallery uploader (club, conf volunteer, travel)
+function handleGalleryUpload(input, galleryId, addCardId) {
+  const gallery = document.getElementById(galleryId);
+  const addCard = document.getElementById(addCardId);
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const src = ev.target.result;
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.innerHTML = `
+        <div class="event-img-wrap">
+          <img src="${src}" alt="Photo" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <button onclick="event.stopPropagation();this.closest('.event-card').remove()" title="Remove"
+            style="position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.55);color:#fff;border:none;cursor:pointer;font-size:0.75rem;display:flex;align-items:center;justify-content:center;z-index:2;">✕</button>
+        </div>
+        <p class="event-caption" contenteditable="true" style="cursor:text;" title="Click to edit caption">CAPTION — click to edit</p>`;
+      card.querySelector('img').addEventListener('click', () => {
+        document.getElementById('mImg').src = src;
+        document.getElementById('modal').classList.add('open');
+      });
+      gallery.insertBefore(card, addCard);
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+// Data Collection dynamic gallery
+function handleDcUpload(input) {
+  const gallery = document.getElementById('dcGallery');
+  const addCard = document.getElementById('dcAddCard');
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const src = ev.target.result;
+      const card = document.createElement('div');
+      card.className = 'event-card';
+      card.innerHTML = `
+        <div class="event-img-wrap">
+          <img src="${src}" alt="Field photo" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          <button onclick="event.stopPropagation();this.closest('.event-card').remove()" title="Remove"
+            style="position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,0.55);color:#fff;border:none;cursor:pointer;font-size:0.75rem;display:flex;align-items:center;justify-content:center;z-index:2;">✕</button>
+        </div>
+        <p class="event-caption" contenteditable="true" style="cursor:text;" title="Click to edit caption">DATA COLLECTION — click to edit</p>`;
+      card.querySelector('img').addEventListener('click', () => {
+        document.getElementById('mImg').src = src;
+        document.getElementById('modal').classList.add('open');
+      });
+      gallery.insertBefore(card, addCard);
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+
+
+function makeCertUploader(inputId, gridId) {}  // kept for legacy compatibility
+
+function closeM() { document.getElementById('modal').classList.remove('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
+
+// ── Hero Banner 3-Second Slideshow Loop ──
+let currentHeroSlide = 0;
+const heroSlides = document.querySelectorAll('.hero-slide');
+
+if (heroSlides.length > 0) {
+  setInterval(() => {
+    heroSlides[currentHeroSlide].classList.remove('active');
+    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+    heroSlides[currentHeroSlide].classList.add('active');
+  }, 3000);
+}
+
+</script>
+</body>
+</html>
